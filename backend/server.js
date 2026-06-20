@@ -19,7 +19,23 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/pandit_infra';
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  process.env.FRONTEND_URL, // Set this to your Vercel URL in Render env vars
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl) and allowed origins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json({ limit: '10mb' })); // Support larger base64 payloads for images
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
