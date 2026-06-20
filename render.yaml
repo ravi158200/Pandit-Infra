@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: pandit-infra-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://raviraj7301325_db_user:raviraj7301325_db_user@cluster0.dkhpikg.mongodb.net/?appName=Cluster0
+      - key: JWT_SECRET
+        value: pandit_infra_secret_token_key_987654321
+      - key: PORT
+        value: 5000
+      - key: FRONTEND_URL
+        value: https://frontend-q0kdbv500-ravi158200s-projects.vercel.app
