@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "6a2440a597c7fcbe35065245",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
+    "title": "Excavator on Site",
+    "category": "Infrastructure"
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065246",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    "title": "Glass Facade Complex",
+    "category": "Commercial"
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065247",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+    "title": "Residential Tower Structure",
+    "category": "Residential"
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065248",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "title": "RCC Steel Mesh Reinforcement",
+    "category": "Infrastructure"
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065249",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    "title": "Penthouse Lounge interior",
+    "category": "Residential"
+  },
+  {
+    "_id": "6a2440a597c7fcbe3506524a",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "https://images.unsplash.com/photo-1503387762-592dedb82617?auto=format&fit=crop&w=800&q=80",
+    "title": "Architect Blueprint Planning",
+    "category": "Commercial"
+  },
+  {
+    "_id": "6a2440a597c7fcbe3506524c",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "/src/assets/gallery/industrial-gallery.png",
+    "title": "Industrial Warehouse Truss Setup",
+    "category": "Industrial"
+  },
+  {
+    "_id": "6a2440a597c7fcbe3506524e",
+    "createdAt": "2026-06-06T15:45:41.428Z",
+    "updatedAt": "2026-06-06T15:45:41.428Z",
+    "imageUrl": "/src/assets/gallery/renovation-gallery.png",
+    "title": "Luxury Villa Living Room Remodel",
+    "category": "Renovation"
+  }
+]

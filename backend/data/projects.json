@@ -1,0 +1,165 @@
+[
+  {
+    "_id": "6a2440a597c7fcbe35065242",
+    "createdAt": "2026-06-06T15:45:41.427Z",
+    "updatedAt": "2026-06-06T15:45:41.427Z",
+    "title": "Pandit Commercial Complex",
+    "description": "A state-of-the-art 7-story commercial center with modern amenities, automated parking, and eco-friendly features.",
+    "category": "Commercial",
+    "status": "Completed",
+    "progress": 100,
+    "client": "Apex Business Hubs",
+    "location": "Mumbai, MH",
+    "images": [
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "timeline": [
+      {
+        "status": "Initiated",
+        "description": "Architectural blueprints and permissions approved.",
+        "date": "2024-01-10T00:00:00.000Z"
+      },
+      {
+        "status": "RCC Framed",
+        "description": "Foundation concrete casting and 7 floors structural framework completed.",
+        "date": "2024-06-15T00:00:00.000Z"
+      },
+      {
+        "status": "Completed",
+        "description": "Finishing, interior electrification, and client handover successfully finalized.",
+        "date": "2025-03-20T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065243",
+    "createdAt": "2026-06-06T15:45:41.427Z",
+    "updatedAt": "2026-06-06T15:45:41.427Z",
+    "title": "State Highway Route 4",
+    "description": "4-lane highway expansion project spanning 12 kilometers including culvert installations and toll plaza layouts.",
+    "category": "Infrastructure",
+    "status": "Ongoing",
+    "progress": 65,
+    "client": "National Roads Authority",
+    "location": "Pune-Nashik Link",
+    "images": [
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80"
+    ],
+    "timeline": [
+      {
+        "status": "Ongoing",
+        "description": "Earthwork excavation and layer leveling under progress.",
+        "date": "2025-08-01T00:00:00.000Z"
+      },
+      {
+        "status": "Bridge Slabs",
+        "description": "Bridge culvert girders and RCC decks installed.",
+        "date": "2026-02-14T00:00:00.000Z"
+      },
+      {
+        "status": "Paving",
+        "description": "Commenced asphalt top paving on Section A and B.",
+        "date": "2026-05-10T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "_id": "6a2440a597c7fcbe35065244",
+    "createdAt": "2026-06-06T15:45:41.427Z",
+    "updatedAt": "2026-06-06T15:45:41.427Z",
+    "title": "Pandit Green Heights Res",
+    "description": "Premium residential luxury towers with 2BHK/3BHK smart layouts, landscaped gardens, and a grand clubhouse.",
+    "category": "Residential",
+    "status": "Live",
+    "progress": 40,
+    "client": "Pandit Housing Realty",
+    "location": "Thane West, MH",
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80"
+    ],
+    "timeline": [
+      {
+        "status": "Excavation",
+        "description": "Deep basement piling and soil stabilization complete.",
+        "date": "2025-11-05T00:00:00.000Z"
+      },
+      {
+        "status": "Foundation Casting",
+        "description": "Main concrete raft foundation successfully poured.",
+        "date": "2026-01-20T00:00:00.000Z"
+      },
+      {
+        "status": "Live Update",
+        "description": "Floor 4 slab steel binding and electrical conduit laying underway.",
+        "date": "2026-06-05T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "_id": "6a2440a597c7fcbe3506524b",
+    "createdAt": "2026-06-06T15:45:41.427Z",
+    "updatedAt": "2026-06-06T15:45:41.427Z",
+    "title": "Giga-Logistics PEB Warehouse",
+    "description": "Construction of a 50,000 sq ft pre-engineered steel warehouse (PEB structure) featuring high-load concrete flooring and integrated storm drainage layout.",
+    "category": "Industrial",
+    "status": "Ongoing",
+    "progress": 75,
+    "client": "Giga Logistics Corp",
+    "location": "Nagpur Industrial Zone, MH",
+    "images": [
+      "/src/assets/projects/industrial-project.png"
+    ],
+    "timeline": [
+      {
+        "status": "Excavation",
+        "description": "High-tonnage grading, soil compaction, and foundation layout completed.",
+        "date": "2025-12-10T00:00:00.000Z"
+      },
+      {
+        "status": "Foundation",
+        "description": "Raft concrete pouring and anchor bolts alignment finalized.",
+        "date": "2026-02-22T00:00:00.000Z"
+      },
+      {
+        "status": "RCC Framed",
+        "description": "Pre-engineered structural steel columns and rafters erection initiated.",
+        "date": "2026-05-18T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "_id": "6a2440a597c7fcbe3506524d",
+    "createdAt": "2026-06-06T15:45:41.427Z",
+    "updatedAt": "2026-06-06T15:45:41.427Z",
+    "title": "Heritage Villa Restoration",
+    "description": "Complete structural rehabilitation, retrofitting, and interior modern remodel of a 50-year-old heritage residential villa.",
+    "category": "Renovation",
+    "status": "Completed",
+    "progress": 100,
+    "client": "Singhania Estates",
+    "location": "South Mumbai, MH",
+    "images": [
+      "/src/assets/projects/renovation-project.png"
+    ],
+    "timeline": [
+      {
+        "status": "Initiated",
+        "description": "Structural stability audit and planning approved.",
+        "date": "2025-09-05T00:00:00.000Z"
+      },
+      {
+        "status": "Phase 1",
+        "description": "Retrofitting walls, beams, and columns concrete jacket casting complete.",
+        "date": "2025-12-18T00:00:00.000Z"
+      },
+      {
+        "status": "Completed",
+        "description": "Modern layout styling, MEP systems layout, and interior handover finalized.",
+        "date": "2026-04-12T00:00:00.000Z"
+      }
+    ]
+  }
+]
