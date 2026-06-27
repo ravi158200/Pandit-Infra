@@ -44,11 +44,11 @@ const Contact = () => {
   };
 
   const contactCards = [
-    { title: 'Office Location', desc: '102, Pandit Heights, Commercial Highway Link Road, Thane West, Mumbai, MH - 400601', icon: <MapPin size={22} className="text-orange-500" /> },
-    { title: 'Phone Contacts', desc: '+91 98765 43210 / +91 22 2548 9654', icon: <Phone size={22} className="text-blue-500" /> },
-    { title: 'Email Inquiries', desc: 'info@panditinfra.com / estimates@panditinfra.com', icon: <Mail size={22} className="text-emerald-500" /> },
+    { title: 'Office Location', desc: '133, Star World Nr. Baghban Circle, Greencity Rd. Bhatha Surat  394510', icon: <MapPin size={22} className="text-orange-500" /> },
+    { title: 'Phone Contacts', desc: '+91 6358755599', icon: <Phone size={22} className="text-blue-500" /> },
+    { title: 'Email Inquiries', desc: 'panditinfra503@gmail.com', icon: <Mail size={22} className="text-emerald-500" /> },
     { title: 'Business Hours', desc: 'Monday - Saturday: 9:00 AM - 6:00 PM (Sunday Closed)', icon: <Clock size={22} className="text-amber-500" /> },
-  ];
+  ];  
 
   return (
     <div className="bg-slate-50 dark:bg-brand-dark transition-colors duration-300 font-sans pb-20">
@@ -126,7 +126,7 @@ const Contact = () => {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="e.g. Ramesh Patil"
+                        placeholder="e.g. John Doe"
                         className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue"
                       />
                     </div>
@@ -140,7 +140,7 @@ const Contact = () => {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="ramesh@gmail.com"
+                        placeholder="john@gmail.com"
                         className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue"
                       />
                     </div>
@@ -224,14 +224,14 @@ const Contact = () => {
         <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md h-96 w-full">
           {/* Real Google Maps Iframe */}
           <iframe
-            src="https://www.google.com/maps/embed?pb=!11m18!1m12!1m3!1d3767.876121516035!2d72.9739779!3d19.200599!2m3!1f0!2f0!3f0!3m2!1i1020!2i768!4f13.1!3m3!1m2!1s0x3be7b90240000001%3A0xb36ef55fa4ee6404!2sThane%20West%2C%20Thane%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1717698542369!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=133+Star+World+Baghban+Circle+Greencity+Road+Bhatha+Surat+394510+Gujarat+India&output=embed&z=16"
             width="100%"
             height="100%"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Pandit Infra Office Location Map"
+            title="Pandit Infra Office Location - Bhatha, Surat"
           ></iframe>
         </div>
       </section>

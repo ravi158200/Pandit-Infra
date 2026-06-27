@@ -28,7 +28,8 @@ const AdminDashboard = () => {
   // Form states for creating new records
   const [newProject, setNewProject] = useState({
     title: '', description: '', category: 'Commercial', status: 'Ongoing',
-    progress: 0, client: '', location: '', images: [], timeline: []
+    progress: 0, client: '', location: '', images: [], timeline: [],
+    beforeImage: '', afterImage: ''
   });
   const [newService, setNewService] = useState({
     title: '', icon: 'Hammer', description: '', detailedDescription: '', image: ''
@@ -221,7 +222,8 @@ const AdminDashboard = () => {
       setProjects([res.data, ...projects]);
       setNewProject({
         title: '', description: '', category: 'Commercial', status: 'Ongoing',
-        progress: 0, client: '', location: '', images: [], timeline: []
+        progress: 0, client: '', location: '', images: [], timeline: [],
+        beforeImage: '', afterImage: ''
       });
       alert('Project added successfully!');
     } catch (err) {
@@ -560,6 +562,42 @@ const AdminDashboard = () => {
                     }}
                     className="w-full p-1.5 rounded-lg border border-slate-800 bg-slate-950 text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 hover:file:text-brand-orange focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs cursor-pointer"
                   />
+                </div>
+                {/* Before Site Image */}
+                <div className="space-y-1">
+                  <label className="block text-slate-400 font-semibold mb-1">Before Site Image</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => setNewProject({ ...newProject, beforeImage: reader.result });
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full p-1.5 rounded-lg border border-slate-800 bg-slate-950 text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 hover:file:text-brand-orange focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs cursor-pointer"
+                  />
+                  {newProject.beforeImage && <img src={newProject.beforeImage} alt="Before preview" className="mt-1.5 h-16 w-full object-cover rounded-lg border border-slate-700" />}
+                </div>
+                {/* After Site Image */}
+                <div className="space-y-1">
+                  <label className="block text-slate-400 font-semibold mb-1">After Site Image</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => setNewProject({ ...newProject, afterImage: reader.result });
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full p-1.5 rounded-lg border border-slate-800 bg-slate-950 text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 hover:file:text-brand-orange focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs cursor-pointer"
+                  />
+                  {newProject.afterImage && <img src={newProject.afterImage} alt="After preview" className="mt-1.5 h-16 w-full object-cover rounded-lg border border-slate-700" />}
                 </div>
                 <div className="md:col-span-3 space-y-1">
                   <label className="block text-slate-400 font-semibold mb-1">Brief Scope Description</label>

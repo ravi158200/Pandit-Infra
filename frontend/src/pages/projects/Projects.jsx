@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, X, MapPin, User, Calendar, CheckCircle, Activity, Play } from 'lucide-react';
+import { Sparkles, X, MapPin, User, Calendar, CheckCircle, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../../components/cards/ProjectCard';
+import BeforeAfterSlider from '../../components/common/BeforeAfterSlider';
 import API from '../../utils/api';
 
 const Projects = () => {
@@ -219,6 +220,23 @@ const Projects = () => {
                     <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-brand-orange to-amber-500 rounded-full" style={{ width: `${selectedProject.progress}%` }} />
                     </div>
+                  </div>
+                )}
+
+                {/* Before / After Site Images Slider */}
+                {(selectedProject.beforeImage || selectedProject.afterImage) && (
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 rounded-full bg-brand-orange" />
+                      Site Transformation — Before &amp; After
+                    </h4>
+                    <BeforeAfterSlider
+                      beforeImage={selectedProject.beforeImage}
+                      afterImage={selectedProject.afterImage}
+                    />
+                    <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center font-semibold">
+                      Drag the handle left or right to compare site images
+                    </p>
                   </div>
                 )}
 

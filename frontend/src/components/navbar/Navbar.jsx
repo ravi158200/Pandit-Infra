@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Hammer, ShieldAlert, ChevronDown, Phone, Mail, MapPin } from 'lucide-react';
+import { Menu, X, ShieldAlert, ChevronDown, Phone, Mail, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 
@@ -64,18 +64,18 @@ const Navbar = ({ onOpenQuote }) => {
       <div className="bg-slate-900 text-slate-300 py-2 hidden lg:block text-xs font-semibold shadow-inner">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <a href="tel:+919876543210" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors">
+            <a href="tel:+916358755599" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors">
               <Phone size={13} className="text-brand-orange" />
-              <span>+91 98765 43210</span>
+              <span>+91 6358755599</span>
             </a>
-            <a href="mailto:info@panditinfra.com" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors">
+            <a href="mailto:panditinfra503@gmail.com" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors">
               <Mail size={13} className="text-brand-orange" />
-              <span>info@panditinfra.com</span>
+              <span>panditinfra503@gmail.com</span>
             </a>
           </div>
           <div className="flex items-center gap-1.5 text-slate-400">
             <MapPin size={13} className="text-brand-orange" />
-            <span>102, Pandit Heights, Thane West, Mumbai, MH - 400601</span>
+            <span>133, Star World Nr. Baghban Circle, Greencity Rd. Bhatha Surat  394510</span>
           </div>
         </div>
       </div>
@@ -85,18 +85,12 @@ const Navbar = ({ onOpenQuote }) => {
         <div className="flex h-20 items-center justify-between">
           
           {/* Logo Brand */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-blue-700 text-white shadow-md transition-transform group-hover:rotate-6">
-              <Hammer size={22} className="stroke-[2.5]" />
-            </div>
-            <div>
-              <span className="text-xl font-extrabold tracking-tight text-slate-900 font-sans">
-                PANDIT <span className="text-brand-orange">INFRA</span>
-              </span>
-              <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">
-                Civil & Construction
-              </p>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img
+              src="/images/logo.png"
+              alt="Pandit Infra Logo"
+              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}

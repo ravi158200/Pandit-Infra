@@ -20,7 +20,9 @@ const projectSchema = new mongoose.Schema({
   client: { type: String },
   location: { type: String },
   timeline: [timelineSchema],
-  images: [{ type: String }]
+  images: [{ type: String }],
+  beforeImage: { type: String, default: '' },
+  afterImage: { type: String, default: '' }
 }, { timestamps: true });
 
 const MongooseProject = mongoose.model('Project', projectSchema);

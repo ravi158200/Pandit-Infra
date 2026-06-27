@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hammer, Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,18 +57,12 @@ const Footer = () => {
           
           {/* Column 1: Company Profile */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-blue-700 text-white shadow-md">
-                <Hammer size={20} className="stroke-[2.5]" />
-              </div>
-              <div>
-                <span className="text-lg font-extrabold tracking-tight text-white">
-                  PANDIT <span className="text-brand-orange">INFRA</span>
-                </span>
-                <p className="text-[9px] uppercase font-bold tracking-widest text-slate-500">
-                  Civil & Construction
-                </p>
-              </div>
+            <Link to="/" className="flex items-start group">
+              <img
+                src="/images/logo.png"
+                alt="Pandit Infra Logo"
+                className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed pt-2">
               Pandit Infra is a premier infrastructure and civil engineering contracting firm. We build durable buildings, commercial centers, and transportation projects with absolute precision.
@@ -146,19 +140,19 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-brand-orange shrink-0 mt-0.5" />
                 <span>
-                  102, Pandit Heights, Commercial Highway Link Road, Thane West, Mumbai, MH - 400601
+                  133, Star World Nr. Baghban Circle, Greencity Rd. Bhatha Surat  394510
                 </span>
               </li>
               <li>
-                <a href="tel:+919876543210" className="flex items-center gap-3 hover:text-white transition">
+                <a href="tel:+916358755599" className="flex items-center gap-3 hover:text-white transition">
                   <Phone size={18} className="text-brand-orange shrink-0" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 6358755599</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:info@panditinfra.com" className="flex items-center gap-3 hover:text-white transition">
+                <a href="mailto:panditinfra503@gmail.com" className="flex items-center gap-3 hover:text-white transition">
                   <Mail size={18} className="text-brand-orange shrink-0" />
-                  <span>info@panditinfra.com</span>
+                  <span>panditinfra503@gmail.com</span>
                 </a>
               </li>
             </ul>
