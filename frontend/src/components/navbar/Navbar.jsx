@@ -89,7 +89,7 @@ const Navbar = ({ onOpenQuote }) => {
             <img
               src="/images/logo.png"
               alt="Pandit Infra Logo"
-              className="h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
