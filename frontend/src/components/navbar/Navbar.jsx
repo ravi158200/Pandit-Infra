@@ -110,7 +110,7 @@ const Navbar = ({ onOpenQuote }) => {
                     onMouseLeave={() => setHovered(false)}
                   >
                     <button
-                      className={`flex items-center gap-1 px-1 py-1 text-sm font-semibold tracking-wide transition-colors duration-300 outline-none cursor-pointer ${
+                      className={`flex items-center gap-1 px-1 py-1 text-base font-bold tracking-wide transition-colors duration-300 outline-none cursor-pointer ${
                         isLinkActive
                           ? 'text-brand-blue'
                           : 'text-slate-600 hover:text-brand-blue'
@@ -157,7 +157,7 @@ const Navbar = ({ onOpenQuote }) => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative px-1 py-2 text-sm font-semibold tracking-wide transition-colors duration-300 ${
+                  className={`relative px-1 py-2 text-base font-bold tracking-wide transition-colors duration-300 ${
                     isActive(link.path)
                       ? 'text-brand-blue'
                       : 'text-slate-600 hover:text-brand-blue'
