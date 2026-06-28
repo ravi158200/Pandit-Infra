@@ -61,7 +61,7 @@ const Navbar = ({ onOpenQuote }) => {
   return (
     <header className="sticky top-0 z-50 w-full flex flex-col">
       {/* Topbar with Contact Info */}
-      <div className="bg-slate-900 text-slate-300 py-2 hidden lg:block text-xs font-semibold shadow-inner">
+      <div className="bg-white text-slate-600 py-2 hidden lg:block text-xs font-semibold border-b border-slate-100 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <a href="tel:+916358755599" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors">
@@ -73,7 +73,7 @@ const Navbar = ({ onOpenQuote }) => {
               <span>panditinfra503@gmail.com</span>
             </a>
           </div>
-          <div className="flex items-center gap-1.5 text-slate-400">
+          <div className="flex items-center gap-1.5 text-slate-500">
             <MapPin size={13} className="text-brand-orange" />
             <span>133, Star World Nr. Baghban Circle, Greencity Rd. Bhatha Surat  394510</span>
           </div>
