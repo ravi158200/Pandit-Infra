@@ -80,16 +80,16 @@ const Navbar = ({ onOpenQuote }) => {
         </div>
       </div>
 
-      <nav className="w-full glass-navbar transition-all duration-300 border-b border-slate-200 shadow-sm">
+      <nav className="w-full bg-white transition-all duration-300 border-b border-slate-200 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-24 items-center justify-between">
           
           {/* Logo Brand */}
           <Link to="/" className="flex items-center group">
             <img
               src="/images/logo.png"
               alt="Pandit Infra Logo"
-              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
