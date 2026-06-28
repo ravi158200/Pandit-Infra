@@ -82,7 +82,7 @@ const Navbar = ({ onOpenQuote }) => {
 
       <nav className="w-full bg-white transition-all duration-300 border-b border-slate-200 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-22 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           
           {/* Logo Brand */}
           <Link to="/" className="flex items-center group">
