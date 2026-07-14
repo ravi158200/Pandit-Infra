@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   BarChart2, FolderKanban, Hammer, Image as ImageIcon,
   MessageSquare, Briefcase, Plus, Trash2, CheckCircle2,
-  AlertCircle, Edit, MapPin, User, Loader2, Eye, EyeOff
+  AlertCircle, Edit, MapPin, User, Loader2, Eye, EyeOff, RefreshCw
 } from 'lucide-react';
 import API from '../../utils/api';
 
@@ -25,6 +25,7 @@ const AdminDashboard = () => {
   const [usersList, setUsersList] = useState([]);
   const [newUserReg, setNewUserReg] = useState({ username: '', email: '', phone: '', password: '', role: 'engineering' });
   const [showRegPassword, setShowRegPassword] = useState(false);
+  const [lastRefreshed, setLastRefreshed] = useState('');
 
   // Form states for creating new records
   const [newProject, setNewProject] = useState({
@@ -79,6 +80,7 @@ const AdminDashboard = () => {
       if (user && user.role === 'admin' && results[5]) {
         setUsersList(results[5].data);
       }
+      setLastRefreshed(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     } catch (err) {
       console.error('Failed to load dashboard payload details', err);
     } finally {
@@ -345,9 +347,26 @@ const AdminDashboard = () => {
 
       {/* Main Console Panels */}
       <main className="flex-grow p-6 lg:p-10 overflow-y-auto bg-slate-955 text-slate-100">
-        <h2 className="text-2xl font-black text-slate-100 mb-6 uppercase tracking-tight">
-          {activeTab} Management Panel
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 border-b border-slate-900 pb-5">
+          <h2 className="text-2xl font-black text-slate-100 uppercase tracking-tight">
+            {activeTab} Management Panel
+          </h2>
+          <div className="flex items-center gap-3">
+            {lastRefreshed && (
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider bg-slate-900 border border-slate-800/80 px-3 py-1.5 rounded-lg">
+                Last Sync: {lastRefreshed}
+              </span>
+            )}
+            <button
+              onClick={fetchAllData}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-brand-orange border border-slate-800 hover:border-slate-700 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm transition duration-200 cursor-pointer"
+              title="Refresh Data"
+            >
+              <RefreshCw size={11} />
+              Refresh
+            </button>
+          </div>
+        </div>
 
         {/* --- OVERVIEW TAB --- */}
         {activeTab === 'Overview' && (
