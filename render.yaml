@@ -13,4 +13,4 @@ services:
       - key: PORT
         value: 5000
       - key: FRONTEND_URL
-        value: https://frontend-q0kdbv500-ravi158200s-projects.vercel.app
+        value: https://pandit-infra.vercel.app
