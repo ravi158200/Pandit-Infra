@@ -80,7 +80,7 @@ const Navbar = ({ onOpenQuote }) => {
         </div>
       </div>
 
-      <nav className="w-full bg-white transition-all duration-300 border-b border-slate-200 shadow-sm">
+      <nav className="w-full bg-slate-900 transition-all duration-300 border-b border-slate-800 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-18 items-center justify-between">
           
@@ -113,7 +113,7 @@ const Navbar = ({ onOpenQuote }) => {
                       className={`flex items-center gap-1 px-1 py-1 text-base font-bold tracking-wide transition-colors duration-300 outline-none cursor-pointer ${
                         isLinkActive
                           ? 'text-brand-blue'
-                          : 'text-slate-600 hover:text-brand-blue'
+                          : 'text-slate-300 hover:text-white'
                       }`}
                     >
                       {link.name}
@@ -130,17 +130,17 @@ const Navbar = ({ onOpenQuote }) => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 8 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-0 mt-2 w-44 rounded-xl bg-white border border-slate-100 shadow-xl py-2.5 z-50 text-slate-800"
+                          className="absolute left-0 mt-2 w-44 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-2.5 z-50 text-slate-200"
                         >
                           {link.dropdown.map((subLink) => (
                             <Link
                               key={subLink.name}
                               to={subLink.path}
                               onClick={() => setHovered(false)}
-                              className={`block px-4 py-2 text-xs font-bold hover:bg-blue-50/50 hover:text-brand-blue hover:pl-5 transition-all duration-300 ${
+                              className={`block px-4 py-2 text-xs font-bold hover:bg-slate-800 hover:text-white hover:pl-5 transition-all duration-300 ${
                                 isActive(subLink.path) 
                                   ? 'text-brand-blue pl-5' 
-                                  : 'text-slate-600'
+                                  : 'text-slate-350'
                               }`}
                             >
                               {subLink.name}
@@ -160,7 +160,7 @@ const Navbar = ({ onOpenQuote }) => {
                   className={`relative px-1 py-2 text-base font-bold tracking-wide transition-colors duration-300 ${
                     isActive(link.path)
                       ? 'text-brand-blue'
-                      : 'text-slate-600 hover:text-brand-blue'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -208,7 +208,7 @@ const Navbar = ({ onOpenQuote }) => {
           <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition"
+              className="p-2 rounded-lg text-slate-300 hover:bg-slate-800 transition"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -225,7 +225,7 @@ const Navbar = ({ onOpenQuote }) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden border-t border-slate-100 bg-white overflow-hidden"
+            className="lg:hidden border-t border-slate-800 bg-slate-900 overflow-hidden"
           >
             <div className="space-y-1.5 px-4 py-4">
               {mobileLinks.map((link) => (
@@ -233,17 +233,17 @@ const Navbar = ({ onOpenQuote }) => {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2.5 rounded-lg text-base font-semibold tracking-wide transition-colors ${
+                  className={`block px-3 py-2.5 rounded-lg text-base font-bold tracking-wide transition-colors ${
                     isActive(link.path)
-                      ? 'bg-blue-50 text-brand-blue'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      ? 'bg-slate-800 text-brand-blue'
+                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
 
-              <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
+              <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
                 {user ? (
                   <>
                     <Link
@@ -259,7 +259,7 @@ const Navbar = ({ onOpenQuote }) => {
                         logout();
                         setIsOpen(false);
                       }}
-                      className="w-full py-3 border border-slate-200 hover:bg-slate-550 font-semibold rounded-lg text-slate-650"
+                      className="w-full py-3 border border-slate-700 hover:bg-slate-800 font-semibold rounded-lg text-slate-300"
                     >
                       Logout
                     </button>

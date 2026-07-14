@@ -192,8 +192,8 @@ async function seed() {
 
     const adminUser = new User({
       username: 'admin',
-      email: 'raviraj7301325@gmail.com',
-      phone: '9876543210',
+      email: 'rajravi895712@gmail.com',
+      phone: '8651840976',
       password: '123456'
     });
     await adminUser.save();

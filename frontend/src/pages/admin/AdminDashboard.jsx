@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   BarChart2, FolderKanban, Hammer, Image as ImageIcon,
   MessageSquare, Briefcase, Plus, Trash2, CheckCircle2,
-  AlertCircle, Edit, MapPin, User, Loader2
+  AlertCircle, Edit, MapPin, User, Loader2, Eye, EyeOff
 } from 'lucide-react';
 import API from '../../utils/api';
 
@@ -24,6 +24,7 @@ const AdminDashboard = () => {
   // User Management States
   const [usersList, setUsersList] = useState([]);
   const [newUserReg, setNewUserReg] = useState({ username: '', email: '', phone: '', password: '', role: 'engineering' });
+  const [showRegPassword, setShowRegPassword] = useState(false);
 
   // Form states for creating new records
   const [newProject, setNewProject] = useState({
@@ -1003,13 +1004,22 @@ const AdminDashboard = () => {
                 </div>
                 <div className="space-y-1">
                   <label className="block text-slate-400 font-semibold mb-1">Password</label>
-                  <input
-                    type="password" required
-                    value={newUserReg.password}
-                    onChange={(e) => setNewUserReg({ ...newUserReg, password: e.target.value })}
-                    placeholder="••••••••"
-                    className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showRegPassword ? "text" : "password"} required
+                      value={newUserReg.password}
+                      onChange={(e) => setNewUserReg({ ...newUserReg, password: e.target.value })}
+                      placeholder="••••••••"
+                      className="w-full p-2.5 pr-10 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowRegPassword(!showRegPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200 cursor-pointer"
+                    >
+                      {showRegPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
                 </div>
                 <div className="space-y-1">
                   <label className="block text-slate-400 font-semibold mb-1">Access Role</label>
