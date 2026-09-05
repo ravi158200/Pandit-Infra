@@ -16,10 +16,11 @@ const ServiceCard = ({ service, onLearnMore }) => {
       {/* Service Image banner */}
       <div className="relative h-48 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
         <img
-          src={image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80'}
+          src={image || '/images/services/building-construction.png'}
           alt={title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80'; }}
         />
         {/* Absolute Floating Icon */}
         <div className="absolute bottom-4 left-4 h-12 w-12 rounded-xl bg-brand-orange text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 opacity-90 transition duration-300">

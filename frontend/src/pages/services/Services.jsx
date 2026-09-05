@@ -107,9 +107,10 @@ const Services = ({ onOpenQuote }) => {
               {/* Side Banner Image */}
               <div className="w-full md:w-2/5 h-48 md:h-auto relative bg-slate-100 dark:bg-slate-800 shrink-0">
                 <img
-                  src={selectedService.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80'}
+                  src={selectedService.image || '/images/services/building-construction.png'}
                   alt={selectedService.title}
                   className="h-full w-full object-cover"
+                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80'; }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-brand-dark/20 to-brand-dark/80" />
               </div>

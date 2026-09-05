@@ -23,6 +23,16 @@ const Navbar = ({ onOpenQuote }) => {
         { name: 'Gallery', path: '/services/gallery' }
       ]
     },
+    { 
+      name: 'Tools & Tracker', 
+      path: '/#cost-estimator',
+      dropdown: [
+        { name: 'Cost Estimator', path: '/#cost-estimator' },
+        { name: 'Blueprint Explorer', path: '/#blueprint-explorer' },
+        { name: 'Project Tracker', path: '/#live-project-tracker' },
+        { name: 'Machinery Fleet', path: '/#equipment-fleet' }
+      ]
+    },
     { name: 'Contact', path: '/contact' },
     { 
       name: 'About', 
@@ -38,6 +48,8 @@ const Navbar = ({ onOpenQuote }) => {
   const mobileLinks = [
     { name: 'Home', path: '/' },
     { name: 'Our Services', path: '/services' },
+    { name: 'Cost Estimator', path: '/#cost-estimator' },
+    { name: 'Blueprint Explorer', path: '/#blueprint-explorer' },
     { name: 'Projects', path: '/services/projects' },
     { name: 'Gallery', path: '/services/gallery' },
     { name: 'Contact', path: '/contact' },
@@ -85,11 +97,11 @@ const Navbar = ({ onOpenQuote }) => {
         <div className="flex h-18 items-center justify-between">
           
           {/* Logo Brand */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group py-1">
             <img
-              src="/images/logo.png"
+              src="/images/logo.svg"
               alt="Pandit Infra Logo"
-              className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm"
             />
           </Link>
 

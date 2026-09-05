@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="blueGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 8)">
+    <line x1="6" y1="116" x2="164" y2="116" stroke="url(#goldGradLight)" stroke-width="6" stroke-linecap="round"/>
+    
+    <path d="M 20 116 L 20 66 L 68 24 L 96 48 L 96 116" 
+          fill="none" stroke="url(#goldGradLight)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+          
+    <path d="M 96 52 
+             L 96 14 
+             C 96 14, 110 6, 126 6 
+             C 144 6, 154 18, 154 32 
+             C 154 46, 142 56, 124 56 
+             L 96 56" 
+          fill="none" stroke="url(#goldGradLight)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <g transform="translate(40, 68)">
+      <rect x="0" y="0" width="34" height="34" rx="3" fill="none" stroke="url(#goldGradLight)" stroke-width="3"/>
+      <line x1="11.3" y1="0" x2="11.3" y2="34" stroke="url(#goldGradLight)" stroke-width="2"/>
+      <line x1="22.6" y1="0" x2="22.6" y2="34" stroke="url(#goldGradLight)" stroke-width="2"/>
+      <line x1="0" y1="11.3" x2="34" y2="11.3" stroke="url(#goldGradLight)" stroke-width="2"/>
+      <line x1="0" y1="22.6" x2="34" y2="22.6" stroke="url(#goldGradLight)" stroke-width="2"/>
+    </g>
+  </g>
+
+  <text x="186" y="44" 
+        font-family="'Outfit', 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif" 
+        font-size="30" 
+        font-weight="800" 
+        letter-spacing="12" 
+        fill="#0F172A">PANDIT</text>
+
+  <text x="184" y="88" 
+        font-family="'Outfit', 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif" 
+        font-size="44" 
+        font-weight="900" 
+        letter-spacing="3" 
+        fill="url(#blueGradLight)">INFRA</text>
+
+  <g transform="translate(184, 98)">
+    <rect x="0" y="0" width="336" height="26" rx="5" fill="#0F172A"/>
+    <text x="168" y="17.5" 
+          font-family="'Outfit', 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif" 
+          font-size="12.5" 
+          font-weight="700" 
+          letter-spacing="3" 
+          text-anchor="middle" 
+          fill="#FFFFFF">ENGINEERS &amp; CONTRACTORS</text>
+  </g>
+</svg>

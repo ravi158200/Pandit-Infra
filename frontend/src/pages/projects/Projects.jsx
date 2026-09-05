@@ -15,13 +15,89 @@ const Projects = () => {
 
   const categories = ['All', 'Residential', 'Commercial', 'Infrastructure', 'Industrial', 'Renovation'];
 
+  const SAMPLE_PROJECTS = [
+    {
+      id: 'p-1',
+      title: 'Surat Ring Road 6-Lane Asphalt Highway',
+      description: 'Bituminous asphalt wearing course paving with GSB sub-base compaction and IRC standard drainage systems.',
+      category: 'Infrastructure',
+      status: 'Ongoing',
+      progress: 78,
+      location: 'Surat Outer Ring Road, Gujarat',
+      client: 'Surat Urban Development Authority (SUDA)',
+      images: ['https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=800&q=80'],
+      beforeImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=800&q=80',
+      afterImage: 'https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=800&q=80',
+      timeline: [
+        { date: '2026-01-15', status: 'Completed', description: 'Topographical Land Survey & Subgrade CBR Soil Testing' },
+        { date: '2026-03-10', status: 'Completed', description: 'Heavy Rock Excavation & Vibratory Roller Sub-base Compaction' },
+        { date: '2026-05-20', status: 'Completed', description: 'Granular Sub-Base (GSB) & Wet Mix Macadam Layering' },
+        { date: '2026-08-01', status: 'In Progress', description: 'Dense Bituminous Macadam (DBM) Heavy Paving' }
+      ]
+    },
+    {
+      id: 'p-2',
+      title: 'Hazira Heavy Industrial PEB Logistics Shed',
+      description: '35m clear span pre-engineered steel truss structure with standing seam roof paneling & high-grade floor hardener.',
+      category: 'Industrial',
+      status: 'Ongoing',
+      progress: 92,
+      location: 'Hazira Port Industrial Area',
+      client: 'Hazira Logistics & Infrastructure Corp',
+      images: ['https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80'],
+      timeline: [
+        { date: '2025-11-01', status: 'Completed', description: 'Geotechnical Soil Survey & Raft Footing Excavation' },
+        { date: '2026-01-10', status: 'Completed', description: 'RCC Foundation Pedestals & Anchor Bolt Casting' },
+        { date: '2026-04-15', status: 'Completed', description: 'PEB Steel Column & Clear-Span Roof Truss Erection' },
+        { date: '2026-07-20', status: 'Completed', description: 'AZ150 Galvalume Standing Seam Roof Sheet Installation' }
+      ]
+    },
+    {
+      id: 'p-3',
+      title: 'Tapi River Heavy Concrete Box Culvert',
+      description: 'Multi-cell reinforced concrete box culvert designed for high-capacity flood drainage and heavy axle bridge loads.',
+      category: 'Infrastructure',
+      status: 'Ongoing',
+      progress: 55,
+      location: 'Tapi River Delta, Surat',
+      client: 'Gujarat State Highway Division',
+      images: ['https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80'],
+      timeline: [
+        { date: '2026-02-01', status: 'Completed', description: 'Hydrological Flow Modeling & Cofferdam Setup' },
+        { date: '2026-05-15', status: 'Completed', description: 'M35 Concrete Pile Foundation & Abutment Pouring' },
+        { date: '2026-08-01', status: 'In Progress', description: 'Precast Box Culvert Cell Placement' }
+      ]
+    },
+    {
+      id: 'p-4',
+      title: 'Vesu Luxury Commercial Corporate Complex',
+      description: 'Multi-story RCC frame building featuring post-tensioned slabs, glass curtain facade & underground basement parking.',
+      category: 'Commercial',
+      status: 'Completed',
+      progress: 100,
+      location: 'Vesu Main Road, Surat',
+      client: 'Vesu Corporate Realty Pvt Ltd',
+      images: ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'],
+      timeline: [
+        { date: '2025-01-10', status: 'Completed', description: 'Basement Diaphragm Wall Excavation & RCC Raft Base' },
+        { date: '2025-06-20', status: 'Completed', description: 'Post-Tensioned Concrete Slab Framing' },
+        { date: '2025-12-15', status: 'Completed', description: 'Exterior Glazing, MEP Fitting & Handover' }
+      ]
+    }
+  ];
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const res = await API.get('/projects');
-        setProjects(res.data);
+        if (res.data && res.data.length > 0) {
+          setProjects(res.data);
+        } else {
+          setProjects(SAMPLE_PROJECTS);
+        }
       } catch (err) {
-        console.warn('Could not fetch projects, displaying placeholders', err);
+        console.warn('Could not fetch projects, displaying sample projects', err);
+        setProjects(SAMPLE_PROJECTS);
       } finally {
         setLoading(false);
       }

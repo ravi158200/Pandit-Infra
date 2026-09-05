@@ -59,9 +59,9 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-start group">
               <img
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt="Pandit Infra Logo"
-                className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-md"
               />
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed pt-2">

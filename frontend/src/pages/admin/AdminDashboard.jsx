@@ -4,7 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import {
   BarChart2, FolderKanban, Hammer, Image as ImageIcon,
   MessageSquare, Briefcase, Plus, Trash2, CheckCircle2,
-  AlertCircle, Edit, MapPin, User, Loader2, Eye, EyeOff, RefreshCw
+  AlertCircle, Edit, MapPin, User, Loader2, Eye, EyeOff, RefreshCw,
+  Save, X as XIcon, Upload
 } from 'lucide-react';
 import API from '../../utils/api';
 
@@ -35,6 +36,12 @@ const AdminDashboard = () => {
   });
   const [newService, setNewService] = useState({
     title: '', icon: 'Hammer', description: '', detailedDescription: '', image: ''
+  });
+
+  // Service edit states
+  const [editingServiceId, setEditingServiceId] = useState(null);
+  const [editServiceForm, setEditServiceForm] = useState({
+    title: '', icon: '', description: '', detailedDescription: '', image: ''
   });
   const [newGallery, setNewGallery] = useState({
     title: '', category: 'Residential', imageUrl: ''
@@ -176,6 +183,29 @@ const AdminDashboard = () => {
       setServices(services.filter(s => s._id !== id));
     } catch (err) {
       alert('Error deleting service');
+    }
+  };
+
+  const handleEditServiceOpen = (service) => {
+    setEditingServiceId(service._id);
+    setEditServiceForm({
+      title: service.title || '',
+      icon: service.icon || 'Hammer',
+      description: service.description || '',
+      detailedDescription: service.detailedDescription || '',
+      image: service.image || ''
+    });
+  };
+
+  const handleUpdateService = async (e, id) => {
+    e.preventDefault();
+    try {
+      const res = await API.put(`/services/${id}`, editServiceForm);
+      setServices(services.map(s => s._id === id ? res.data : s));
+      setEditingServiceId(null);
+      alert('Service updated successfully!');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Error updating service');
     }
   };
 
@@ -816,24 +846,159 @@ const AdminDashboard = () => {
             </div>
 
             {/* List Services */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               {services.map(s => (
-                <div key={s._id} className="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-lg text-white flex justify-between gap-4 group hover:bg-slate-850/50 transition-colors duration-300">
-                  <div className="space-y-1 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-extrabold text-slate-200">{s.title}</span>
-                      <span className="text-[10px] text-slate-400 font-bold border border-slate-800 bg-slate-950 px-1.5 py-0.5 rounded uppercase">Icon: {s.icon}</span>
+                <div key={s._id} className="bg-slate-900 rounded-2xl border border-slate-800 shadow-lg text-white overflow-hidden">
+                  
+                  {/* Service Header Row */}
+                  <div className="flex items-start gap-4 p-5">
+                    {/* Thumbnail */}
+                    <div className="shrink-0 w-24 h-20 rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+                      <img
+                        src={s.image || '/images/services/building-construction.png'}
+                        alt={s.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=200&q=60'; }}
+                      />
                     </div>
-                    <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed">{s.description}</p>
+
+                    {/* Info */}
+                    <div className="flex-1 space-y-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-extrabold text-slate-100">{s.title}</span>
+                        <span className="text-[10px] text-slate-400 font-bold border border-slate-700 bg-slate-950 px-1.5 py-0.5 rounded uppercase tracking-wider">Icon: {s.icon}</span>
+                      </div>
+                      <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">{s.description}</p>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="shrink-0 flex flex-col gap-2">
+                      <button
+                        onClick={() => editingServiceId === s._id ? setEditingServiceId(null) : handleEditServiceOpen(s)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition ${
+                          editingServiceId === s._id
+                            ? 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            : 'bg-brand-orange/10 text-brand-orange hover:bg-brand-orange/20'
+                        }`}
+                      >
+                        {editingServiceId === s._id ? <><XIcon size={12}/> Cancel</> : <><Edit size={12}/> Edit</>}
+                      </button>
+                      <button
+                        onClick={() => handleDeleteService(s._id)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-red-500/10 text-red-500 hover:bg-red-500/20 transition"
+                      >
+                        <Trash2 size={12}/> Delete
+                      </button>
+                    </div>
                   </div>
-                  <div className="shrink-0 self-start">
-                    <button
-                      onClick={() => handleDeleteService(s._id)}
-                      className="p-2 text-red-500 hover:bg-red-950/40 rounded-lg transition"
+
+                  {/* Inline Edit Panel */}
+                  {editingServiceId === s._id && (
+                    <form
+                      onSubmit={(e) => handleUpdateService(e, s._id)}
+                      className="border-t border-slate-800 p-5 bg-slate-950/60 space-y-4"
                     >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
+                      <h4 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-orange mb-3 flex items-center gap-1.5">
+                        <Edit size={11}/> Edit Service Details
+                      </h4>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div className="space-y-1">
+                          <label className="block text-slate-400 font-semibold">Service Title</label>
+                          <input
+                            type="text" required
+                            value={editServiceForm.title}
+                            onChange={(e) => setEditServiceForm({ ...editServiceForm, title: e.target.value })}
+                            className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange focus:outline-none transition-all duration-300 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="block text-slate-400 font-semibold">Lucide Icon Name</label>
+                          <input
+                            type="text" required
+                            value={editServiceForm.icon}
+                            onChange={(e) => setEditServiceForm({ ...editServiceForm, icon: e.target.value })}
+                            className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange focus:outline-none transition-all duration-300 text-xs"
+                          />
+                        </div>
+                        <div className="md:col-span-2 space-y-1">
+                          <label className="block text-slate-400 font-semibold">Replace Image</label>
+                          <div className="flex items-start gap-3">
+                            <div className="shrink-0 w-20 h-16 rounded-lg overflow-hidden bg-slate-800 border border-slate-700">
+                              <img
+                                src={editServiceForm.image || '/images/services/building-construction.png'}
+                                alt="preview"
+                                className="w-full h-full object-cover"
+                                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=200&q=60'; }}
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <input
+                                type="url"
+                                value={editServiceForm.image}
+                                onChange={(e) => setEditServiceForm({ ...editServiceForm, image: e.target.value })}
+                                placeholder="Enter image URL or upload below..."
+                                className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs mb-2"
+                              />
+                              <label className="flex items-center gap-2 cursor-pointer text-[10px] font-bold text-slate-400 hover:text-brand-orange transition">
+                                <Upload size={12}/>
+                                <span>Upload new image file</span>
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                      const reader = new FileReader();
+                                      reader.onloadend = () => setEditServiceForm({ ...editServiceForm, image: reader.result });
+                                      reader.readAsDataURL(file);
+                                    }
+                                  }}
+                                />
+                              </label>
+                              <p className="text-[9px] text-slate-500 mt-1">Tip: You can also paste a local path like <code className="text-brand-orange">/images/services/building-construction.png</code></p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="md:col-span-2 space-y-1">
+                          <label className="block text-slate-400 font-semibold">Short Description</label>
+                          <textarea
+                            required rows="2"
+                            value={editServiceForm.description}
+                            onChange={(e) => setEditServiceForm({ ...editServiceForm, description: e.target.value })}
+                            className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs resize-none"
+                          />
+                        </div>
+                        <div className="md:col-span-2 space-y-1">
+                          <label className="block text-slate-400 font-semibold">Detailed Specifications</label>
+                          <textarea
+                            required rows="3"
+                            value={editServiceForm.detailedDescription}
+                            onChange={(e) => setEditServiceForm({ ...editServiceForm, detailedDescription: e.target.value })}
+                            className="w-full p-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-orange focus:outline-none transition-all duration-300 text-xs resize-none"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 pt-1">
+                        <button
+                          type="submit"
+                          className="flex items-center gap-1.5 bg-brand-orange hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-lg shadow-md text-xs transition cursor-pointer"
+                        >
+                          <Save size={13}/> Save Changes
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingServiceId(null)}
+                          className="flex items-center gap-1.5 py-2 px-4 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-600 text-xs font-semibold transition cursor-pointer"
+                        >
+                          <XIcon size={13}/> Cancel
+                        </button>
+                      </div>
+                    </form>
+                  )}
+
                 </div>
               ))}
             </div>
