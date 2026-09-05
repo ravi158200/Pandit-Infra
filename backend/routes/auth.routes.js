@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import verifyAdmin from '../middleware/auth.middleware.js';
-import { sendUserCredentialsEmail } from '../utils/emailService.js';
+import { sendUserCredentialsEmail, sendForgotPasswordEmail } from '../utils/emailService.js';
 import { sendUserCredentialsSMS } from '../utils/smsService.js';
 
 const router = express.Router();
@@ -157,6 +157,28 @@ router.delete('/users/:id', verifyAdmin, async (req, res) => {
     res.json({ message: 'User deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: 'Error deleting user', error: err.message });
+  }
+});
+
+// POST Forgot Password Assistance (Public)
+router.post('/forgot-password', async (req, res) => {
+  const { name, designation, email } = req.body;
+  if (!name || !designation) {
+    return res.status(400).json({ message: 'Name and Designation are required' });
+  }
+
+  try {
+    await sendForgotPasswordEmail({ name, designation, email });
+    res.json({
+      success: true,
+      message: 'Password reset notification email sent successfully to the administrator.'
+    });
+  } catch (err) {
+    console.error('Forgot password endpoint error:', err);
+    res.status(500).json({
+      message: 'Failed to send forgot password email notification.',
+      error: err.message
+    });
   }
 });
 

@@ -45,8 +45,20 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const requestForgotPassword = async (name, designation, email = '') => {
+    try {
+      const res = await API.post('/auth/forgot-password', { name, designation, email });
+      return { success: true, message: res.data.message };
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Failed to submit password reset request.'
+      };
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, requestForgotPassword }}>
       {children}
     </AuthContext.Provider>
   );

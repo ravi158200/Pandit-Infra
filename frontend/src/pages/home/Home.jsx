@@ -10,7 +10,9 @@ import ClientsSection from '../../components/home/ClientsSection';
 import CostEstimator from '../../components/tools/CostEstimator';
 import BlueprintVisualizer from '../../components/tools/BlueprintVisualizer';
 import BeforeAfterSlider from '../../components/home/BeforeAfterSlider';
+import FoundationShowcase from '../../components/home/FoundationShowcase';
 import FleetShowcase from '../../components/home/FleetShowcase';
+import PpeKitShowcase from '../../components/home/PpeKitShowcase';
 import ProjectTracker from '../../components/home/ProjectTracker';
 
 const Home = ({ onOpenQuote }) => {
@@ -28,19 +30,25 @@ const Home = ({ onOpenQuote }) => {
       {/* 3. Company Vision & Core Capabilities */}
       <CompanyDescription onOpenQuote={onOpenQuote} />
 
-      {/* 4. Live Construction & Infrastructure Cost Estimator */}
+      {/* 4. Heavy RCC Foundation, Concrete & Full Steel Rebar Engineering */}
+      <FoundationShowcase onOpenQuote={onOpenQuote} />
+
+      {/* 5. Live Construction & Infrastructure Cost Estimator */}
       <CostEstimator onOpenQuote={onOpenQuote} />
 
-      {/* 5. Interactive Civil Engineering Blueprint Explorer */}
+      {/* 6. Interactive Civil Engineering Blueprint Explorer */}
       <BlueprintVisualizer />
 
-      {/* 6. Raw Excavation to Finished Infrastructure Transformation Slider */}
+      {/* 7. Raw Excavation to Finished Infrastructure Transformation Slider */}
       <BeforeAfterSlider />
 
-      {/* 7. Heavy Machinery Infrastructure Fleet Showcase */}
+      {/* 8. Heavy Machinery Infrastructure Fleet Showcase */}
       <FleetShowcase onOpenQuote={onOpenQuote} />
 
-      {/* 8. Real-Time Project Milestone Tracker */}
+      {/* 9. Mandatory PPE Safety Kits for Civil Work */}
+      <PpeKitShowcase />
+
+      {/* 10. Real-Time Project Milestone Tracker */}
       <ProjectTracker onOpenQuote={onOpenQuote} />
 
       {/* 9. Trusted Industrial Partners & Clients */}

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Lock, User, ShieldCheck, Eye, EyeOff, ArrowLeft, KeyRound, Sparkles, Building2, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { 
+  Lock, User, ShieldCheck, Eye, EyeOff, ArrowLeft, 
+  KeyRound, Sparkles, AlertTriangle, X, Mail, Briefcase, 
+  Send, Headphones, CheckCircle2, HelpCircle 
+} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,7 +16,22 @@ const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
 
-  const { login, user } = useAuth();
+  // Failed login attempts state (persisted in localStorage)
+  const [failedAttempts, setFailedAttempts] = useState(() => {
+    const saved = localStorage.getItem('admin_login_attempts');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  // Forgot Password Modal state
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [fpName, setFpName] = useState('');
+  const [fpDesignation, setFpDesignation] = useState('');
+  const [fpEmail, setFpEmail] = useState('');
+  const [fpLoading, setFpLoading] = useState(false);
+  const [fpError, setFpError] = useState('');
+  const [fpSuccess, setFpSuccess] = useState(false);
+
+  const { login, user, requestForgotPassword } = useAuth();
   const navigate = useNavigate();
 
   // Redirect if already logged in
@@ -24,6 +43,12 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (failedAttempts >= 5) {
+      setError('5 failed login attempts reached. Please connect to admin for assistance.');
+      return;
+    }
+
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password.');
       return;
@@ -35,9 +60,20 @@ const AdminLogin = () => {
     try {
       const res = await login(username, password);
       if (res.success) {
+        // Reset failed attempts on successful login
+        localStorage.removeItem('admin_login_attempts');
+        setFailedAttempts(0);
         navigate('/admin/dashboard');
       } else {
-        setError(res.message || 'Invalid administrative credentials provided.');
+        const newAttempts = failedAttempts + 1;
+        setFailedAttempts(newAttempts);
+        localStorage.setItem('admin_login_attempts', newAttempts.toString());
+
+        if (newAttempts >= 5) {
+          setError('5 failed login attempts reached. Account access paused. Please connect to admin.');
+        } else {
+          setError(`${res.message || 'Invalid administrative credentials.'} (${5 - newAttempts} attempt${5 - newAttempts > 1 ? 's' : ''} remaining)`);
+        }
         setLoading(false);
       }
     } catch (err) {
@@ -47,8 +83,49 @@ const AdminLogin = () => {
   };
 
   const handleQuickFill = () => {
+    if (failedAttempts >= 5) return;
     setUsername('admin');
     setPassword('admin123');
+    setError('');
+  };
+
+  const openForgotModal = () => {
+    setFpName('');
+    setFpDesignation('');
+    setFpEmail('');
+    setFpError('');
+    setFpSuccess(false);
+    setIsForgotModalOpen(true);
+  };
+
+  const handleForgotPasswordSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!fpName.trim() || !fpDesignation.trim()) {
+      setFpError('Please enter both your Name and Designation.');
+      return;
+    }
+
+    setFpLoading(true);
+    setFpError('');
+
+    try {
+      const res = await requestForgotPassword(fpName.trim(), fpDesignation.trim(), fpEmail.trim());
+      if (res.success) {
+        setFpSuccess(true);
+      } else {
+        setFpError(res.message || 'Failed to send password reset request.');
+      }
+    } catch (err) {
+      setFpError('Failed to send reset email. Please try again or contact support.');
+    } finally {
+      setFpLoading(false);
+    }
+  };
+
+  const handleResetAttempts = () => {
+    localStorage.removeItem('admin_login_attempts');
+    setFailedAttempts(0);
     setError('');
   };
 
@@ -115,9 +192,45 @@ const AdminLogin = () => {
           </p>
         </div>
 
-        {/* Alert Banner for Errors */}
+        {/* Alert Banner for 5 Failed Attempts or Errors */}
         <AnimatePresence>
-          {error && (
+          {failedAttempts >= 5 ? (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-6 p-4 rounded-xl bg-red-950/80 border border-red-700/80 text-red-200 text-xs shadow-inner"
+            >
+              <div className="flex items-start gap-3">
+                <AlertTriangle size={20} className="text-red-400 shrink-0 mt-0.5" />
+                <div className="flex-1 space-y-2">
+                  <div className="font-bold text-red-100 text-sm">
+                    5 Failed Login Attempts Reached
+                  </div>
+                  <p className="text-red-300 leading-relaxed">
+                    Maximum allowed login attempts exceeded. Please connect to admin for assistance or submit a password reset request.
+                  </p>
+                  <div className="pt-2 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={openForgotModal}
+                      className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow"
+                    >
+                      <Headphones size={14} />
+                      <span>Connect to Admin</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleResetAttempts}
+                      className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition cursor-pointer"
+                    >
+                      Try Again
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ) : error ? (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -127,7 +240,7 @@ const AdminLogin = () => {
               <AlertTriangle size={18} className="text-red-400 shrink-0 mt-0.5" />
               <div className="flex-1 font-medium">{error}</div>
             </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
 
         {/* Login Form */}
@@ -144,10 +257,11 @@ const AdminLogin = () => {
               <input
                 type="text"
                 required
+                disabled={failedAttempts >= 5}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username (e.g. admin)"
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-800 bg-slate-950/80 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange text-sm font-medium transition-all duration-200"
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-800 bg-slate-950/80 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
@@ -158,6 +272,14 @@ const AdminLogin = () => {
               <label className="block text-[11px] font-bold uppercase tracking-widest text-slate-400">
                 Security Password
               </label>
+              <button
+                type="button"
+                onClick={openForgotModal}
+                className="text-xs text-brand-orange hover:text-orange-400 font-semibold cursor-pointer transition hover:underline flex items-center gap-1"
+              >
+                <HelpCircle size={13} />
+                <span>Forgot Password?</span>
+              </button>
             </div>
             <div className="relative group">
               <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500 group-focus-within:text-brand-orange transition-colors">
@@ -166,15 +288,17 @@ const AdminLogin = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 required
+                disabled={failedAttempts >= 5}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-800 bg-slate-950/80 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange text-sm font-medium transition-all duration-200"
+                className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-800 bg-slate-950/80 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <button
                 type="button"
+                disabled={failedAttempts >= 5}
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-200 cursor-pointer transition-colors"
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-200 cursor-pointer transition-colors disabled:opacity-50"
                 title={showPassword ? "Hide Password" : "Show Password"}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -193,13 +317,21 @@ const AdminLogin = () => {
               />
               <span>Keep workstation authorized</span>
             </label>
+
+            <button
+              type="button"
+              onClick={openForgotModal}
+              className="text-slate-400 hover:text-brand-orange text-xs cursor-pointer transition"
+            >
+              Connect to Admin
+            </button>
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
-            className="relative w-full overflow-hidden flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-orange via-orange-600 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-950/50 hover:shadow-orange-900/60 transition-all duration-300 transform active:scale-[0.99] disabled:opacity-50 cursor-pointer mt-2"
+            disabled={loading || failedAttempts >= 5}
+            className="relative w-full overflow-hidden flex items-center justify-center gap-2.5 bg-gradient-to-r from-brand-orange via-orange-600 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-950/50 hover:shadow-orange-900/60 transition-all duration-300 transform active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-2"
           >
             {loading ? (
               <div className="flex items-center gap-2.5">
@@ -229,8 +361,9 @@ const AdminLogin = () => {
 
           <button
             type="button"
+            disabled={failedAttempts >= 5}
             onClick={handleQuickFill}
-            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 hover:text-amber-300 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shrink-0"
+            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 hover:text-amber-300 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Sparkles size={13} />
             <span>Auto-fill</span>
@@ -242,6 +375,166 @@ const AdminLogin = () => {
           <p>© {new Date().getFullYear()} Pandit Infra Engineering. Unauthorized access attempts are monitored and logged.</p>
         </div>
       </motion.div>
+
+      {/* Forgot Password Modal */}
+      <AnimatePresence>
+        {isForgotModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+            >
+              {/* Top Accent line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-orange to-amber-500" />
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setIsForgotModalOpen(false)}
+                className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-800 transition cursor-pointer"
+              >
+                <X size={20} />
+              </button>
+
+              {!fpSuccess ? (
+                <>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-12 w-12 rounded-2xl bg-brand-orange/15 text-brand-orange flex items-center justify-center shrink-0">
+                      <Headphones size={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-white">Forgot Password</h2>
+                      <p className="text-xs text-slate-400">Request password reset assistance from Admin</p>
+                    </div>
+                  </div>
+
+                  {fpError && (
+                    <div className="mb-4 p-3 rounded-xl bg-red-950/80 border border-red-800 text-red-300 text-xs flex items-start gap-2">
+                      <AlertTriangle size={16} className="text-red-400 shrink-0 mt-0.5" />
+                      <span>{fpError}</span>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleForgotPasswordSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                        Full Name <span className="text-brand-orange">*</span>
+                      </label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+                          <User size={16} />
+                        </span>
+                        <input
+                          type="text"
+                          required
+                          value={fpName}
+                          onChange={(e) => setFpName(e.target.value)}
+                          placeholder="e.g. Rajesh Kumar"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-800 bg-slate-950 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange text-xs font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                        Designation <span className="text-brand-orange">*</span>
+                      </label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+                          <Briefcase size={16} />
+                        </span>
+                        <input
+                          type="text"
+                          required
+                          value={fpDesignation}
+                          onChange={(e) => setFpDesignation(e.target.value)}
+                          placeholder="e.g. Senior Site Engineer"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-800 bg-slate-950 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange text-xs font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                        Email Address <span className="text-slate-600 font-normal">(Optional)</span>
+                      </label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+                          <Mail size={16} />
+                        </span>
+                        <input
+                          type="email"
+                          value={fpEmail}
+                          onChange={(e) => setFpEmail(e.target.value)}
+                          placeholder="e.g. employee@panditinfra.com"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-800 bg-slate-950 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange text-xs font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="pt-3 flex items-center justify-end gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setIsForgotModalOpen(false)}
+                        className="px-4 py-2.5 rounded-xl border border-slate-800 hover:bg-slate-800 text-slate-300 font-semibold text-xs transition cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={fpLoading}
+                        className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs shadow-md transition cursor-pointer flex items-center gap-2 disabled:opacity-50"
+                      >
+                        {fpLoading ? (
+                          <>
+                            <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Sending Email...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Next</span>
+                            <Send size={14} />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-4 space-y-4">
+                  <div className="h-16 w-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto animate-bounce">
+                    <CheckCircle2 size={36} />
+                  </div>
+
+                  <h3 className="text-lg font-extrabold text-white">Reset Email Sent Successfully</h3>
+                  <p className="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto">
+                    Your password recovery details for <strong className="text-white">{fpName}</strong> ({fpDesignation}) have been transmitted via email to the Site Administrator.
+                  </p>
+
+                  <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 text-[11px] text-slate-400">
+                    The administrator will verify your credentials and reach out to reset your access.
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsForgotModalOpen(false);
+                      if (failedAttempts >= 5) {
+                        handleResetAttempts();
+                      }
+                    }}
+                    className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition cursor-pointer"
+                  >
+                    Return to Login
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
