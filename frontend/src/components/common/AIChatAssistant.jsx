@@ -8,14 +8,14 @@ import {
 import API from '../../utils/api';
 
 const QUICK_PROMPTS = [
-  { icon: '🏗️', label: '1500 sq ft RCC Cost', prompt: 'Estimate cost for 1500 sq ft RCC commercial building' },
-  { icon: '🚜', label: 'Excavation Process', prompt: 'What is the step by step process and rate for site excavation work?' },
-  { icon: '🧱', label: 'Brickwork & Plaster', prompt: 'Tell me about brick masonry, AAC block laying and plastering rates.' },
+  { icon: '🏗️', label: 'RCC Framing Specs', prompt: 'Tell me about your RCC frame building specs and foundation procedures.' },
+  { icon: '🚜', label: 'Excavation Process', prompt: 'What is the step by step process for site excavation and soil work?' },
+  { icon: '🧱', label: 'Brickwork & Plaster', prompt: 'Tell me about brick masonry, AAC block laying and plastering standards.' },
   { icon: '💧', label: 'Waterproofing System', prompt: 'What is your procedure for terrace and basement waterproofing?' },
-  { icon: '🛣️', label: 'Road Asphalt Paving', prompt: 'What are your rates and timelines for bituminous asphalt road paving?' },
+  { icon: '🛣️', label: 'Road Asphalt Paving', prompt: 'What are your specifications and timelines for bituminous asphalt road paving?' },
 ];
 
-const INITIAL_WELCOME_TEXT = `Hello! 👋 I am **Pandit AI**, your Civil Engineering & Infrastructure Assistant.\n\nI can process questions and cost estimates for **ANY civil engineering work** (Excavation, RCC Foundation, Brickwork, Plastering, Waterproofing, Flooring, Bituminous Roads & Box Culverts).\n\nYou can **type** your question or click the 🎤 **Microphone button** to use voice input!`;
+const INITIAL_WELCOME_TEXT = `Hello! 👋 I am **Pandit AI**, your Civil Engineering & Infrastructure Assistant.\n\nI can process questions and technical specs for **ANY civil engineering work** (Excavation, RCC Foundation, Brickwork, Plastering, Waterproofing, Flooring, Bituminous Roads & Box Culverts).\n\nYou can **type** your question or click the 🎤 **Microphone button** to use voice input!`;
 
 const AIChatAssistant = ({ onOpenQuote }) => {
   const [isOpen, setIsOpen] = useState(false);

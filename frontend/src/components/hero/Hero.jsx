@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronRight, Calculator, HardHat, Compass, ShieldAlert, Award, Layers } from 'lucide-react';
+import { ArrowRight, ChevronRight, HardHat, Compass, ShieldAlert, Award, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import hero1 from '../../assets/hero/hero1.png';
@@ -124,17 +124,9 @@ const Hero = ({ onOpenQuote }) => {
                 onClick={onOpenQuote}
                 className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-xl shadow-orange-500/25 hover:shadow-orange-500/40 transition-all duration-300 flex items-center gap-2 group text-xs uppercase tracking-wider cursor-pointer transform hover:-translate-y-0.5"
               >
-                Request Estimation Quote
+                Request Official Quote
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </button>
-              
-              <a
-                href="#cost-estimator"
-                className="bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700/80 font-bold px-6 py-4 rounded-2xl transition flex items-center gap-2 text-xs uppercase tracking-wider backdrop-blur-md hover:border-orange-500/50"
-              >
-                <Calculator size={15} className="text-orange-400" />
-                Live Cost Calculator
-              </a>
 
               <a
                 href="#blueprint-explorer"
