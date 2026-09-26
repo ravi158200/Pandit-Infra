@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar      from './components/navbar/Navbar';
 import Footer      from './components/footer/Footer';
 import WhatsAppButton from './components/common/WhatsAppButton';
+import AIChatAssistant from './components/common/AIChatAssistant';
 import QuoteModal  from './components/modals/QuoteModal';
 
 // ── Pages (organized by folder) ───────────────────────
@@ -72,6 +73,7 @@ function App() {
 
           {/* Floating Actions */}
           <WhatsAppButton />
+          <AIChatAssistant onOpenQuote={() => setIsQuoteOpen(true)} />
 
           {/* Inquiry Form Modal */}
           <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />

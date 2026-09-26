@@ -10,6 +10,7 @@ import projectRoutes from './routes/projects.routes.js';
 import queryRoutes from './routes/queries.routes.js';
 import galleryRoutes from './routes/gallery.routes.js';
 import careerRoutes from './routes/careers.routes.js';
+import aiRoutes from './routes/ai.routes.js';
 
 // Load Config
 dotenv.config();
@@ -51,6 +52,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/queries', queryRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/careers', careerRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

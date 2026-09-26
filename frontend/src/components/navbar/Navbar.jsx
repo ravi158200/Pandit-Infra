@@ -6,8 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const Navbar = ({ onOpenQuote }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAboutHovered, setIsAboutHovered] = useState(false);
-  const [isServicesHovered, setIsServicesHovered] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
   const { user, logout } = useAuth();
 
@@ -25,9 +24,8 @@ const Navbar = ({ onOpenQuote }) => {
     },
     { 
       name: 'Tools & Tracker', 
-      path: '/#cost-estimator',
+      path: '/#blueprint-explorer',
       dropdown: [
-        { name: 'Cost Estimator', path: '/#cost-estimator' },
         { name: 'Blueprint Explorer', path: '/#blueprint-explorer' },
         { name: 'Project Tracker', path: '/#live-project-tracker' },
         { name: 'Machinery Fleet', path: '/#equipment-fleet' }
@@ -48,7 +46,6 @@ const Navbar = ({ onOpenQuote }) => {
   const mobileLinks = [
     { name: 'Home', path: '/' },
     { name: 'Our Services', path: '/services' },
-    { name: 'Cost Estimator', path: '/#cost-estimator' },
     { name: 'Blueprint Explorer', path: '/#blueprint-explorer' },
     { name: 'Projects', path: '/services/projects' },
     { name: 'Gallery', path: '/services/gallery' },
@@ -62,12 +59,12 @@ const Navbar = ({ onOpenQuote }) => {
     return location.pathname.startsWith(path) && path !== '/';
   };
 
-  const isAboutActive = () => {
-    return location.pathname.startsWith('/about');
-  };
-
-  const isServicesActive = () => {
-    return location.pathname.startsWith('/services');
+  const isDropdownActive = (link) => {
+    if (link.path && link.path !== '/' && location.pathname.startsWith(link.path)) return true;
+    if (link.dropdown) {
+      return link.dropdown.some(sub => isActive(sub.path));
+    }
+    return false;
   };
 
   return (
@@ -109,17 +106,15 @@ const Navbar = ({ onOpenQuote }) => {
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => {
               if (link.dropdown) {
-                const isDropdownAbout = link.name === 'About';
-                const isHovered = isDropdownAbout ? isAboutHovered : isServicesHovered;
-                const setHovered = isDropdownAbout ? setIsAboutHovered : setIsServicesHovered;
-                const isLinkActive = isDropdownAbout ? isAboutActive() : isServicesActive();
+                const isHovered = activeDropdown === link.name;
+                const isLinkActive = isDropdownActive(link);
 
                 return (
                   <div
                     key={link.name}
                     className="relative py-2"
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
+                    onMouseEnter={() => setActiveDropdown(link.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
                       className={`flex items-center gap-1 px-1 py-1 text-base font-bold tracking-wide transition-colors duration-300 outline-none cursor-pointer ${
@@ -149,13 +144,13 @@ const Navbar = ({ onOpenQuote }) => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 8 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-0 mt-2 w-44 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-2.5 z-50 text-slate-200"
+                          className="absolute left-0 mt-2 w-48 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-2.5 z-50 text-slate-200"
                         >
                           {link.dropdown.map((subLink) => (
                             <Link
                               key={subLink.name}
                               to={subLink.path}
-                              onClick={() => setHovered(false)}
+                              onClick={() => setActiveDropdown(null)}
                               className={`block px-4 py-2 text-xs font-bold hover:bg-slate-800 hover:text-white hover:pl-5 transition-all duration-300 ${
                                 isActive(subLink.path) 
                                   ? 'text-brand-blue pl-5' 

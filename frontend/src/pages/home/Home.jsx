@@ -7,7 +7,6 @@ import CompanyDescription from '../../components/home/CompanyDescription';
 import ClientsSection from '../../components/home/ClientsSection';
 
 // ── New Unique Interactive Components ──────────────────
-import CostEstimator from '../../components/tools/CostEstimator';
 import BlueprintVisualizer from '../../components/tools/BlueprintVisualizer';
 import BeforeAfterSlider from '../../components/home/BeforeAfterSlider';
 import FoundationShowcase from '../../components/home/FoundationShowcase';
@@ -33,10 +32,7 @@ const Home = ({ onOpenQuote }) => {
       {/* 4. Heavy RCC Foundation, Concrete & Full Steel Rebar Engineering */}
       <FoundationShowcase onOpenQuote={onOpenQuote} />
 
-      {/* 5. Live Construction & Infrastructure Cost Estimator */}
-      <CostEstimator onOpenQuote={onOpenQuote} />
-
-      {/* 6. Interactive Civil Engineering Blueprint Explorer */}
+      {/* 5. Interactive Civil Engineering Blueprint Explorer */}
       <BlueprintVisualizer />
 
       {/* 7. Raw Excavation to Finished Infrastructure Transformation Slider */}
