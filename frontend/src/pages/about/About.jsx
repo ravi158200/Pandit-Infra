@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Eye, ShieldAlert, Award, Compass, HeartHandshake } from 'lucide-react';
+import { Target, Eye, ShieldAlert, Award, Compass, HeartHandshake, UserCheck, Sparkles, Building2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const About = () => {
@@ -11,14 +11,12 @@ const About = () => {
   ];
 
   const timeline = [
-    { year: '2011', title: 'Company Inception', desc: 'Founded by Er. Dinesh Pandit as a small residential brick-and-mortar contracting unit in Thane.' },
-    { year: '2015', title: 'Roads & Infrastructure Expansion', desc: 'Secured first public contract for urban link roads, expanding our fleet to include heavy motor graders.' },
-    { year: '2019', title: 'ISO 9001 Certification & RCC Focus', desc: 'Achieved ISO certification and specialized in large reinforced cement concrete (RCC) foundations.' },
-    { year: '2023', title: 'Commercial Towers Handover', desc: 'Successfully handed over Pandit Commercial Complex, our first 7-story commercial steel and glass building.' },
-    { year: '2026', title: 'Multi-State Civil Contractor', desc: 'Scaling operations across central and Western India with active road expansions and residential towers.' }
+    { year: '2011', title: 'Company Inception', desc: 'Founded by Er. Ashok Kumar Singason Pandit as a premier civil engineering & infrastructure contracting firm.' },
+    { year: '2015', title: 'Roads & Infrastructure Expansion', desc: 'Secured first major public highway contract for urban link roads, expanding our fleet to include heavy motor graders.' },
+    { year: '2019', title: 'ISO 9001 Certification & RCC Focus', desc: 'Achieved ISO certification and specialized in large reinforced cement concrete (RCC) foundations & precast culverts.' },
+    { year: '2023', title: 'Commercial Towers Handover', desc: 'Successfully handed over Pandit Commercial Complex, our 7-story commercial steel & glass landmark building.' },
+    { year: '2026', title: 'Multi-State Civil Contractor', desc: 'Scaling operations across Gujarat, Maharashtra & Western India under the strategic leadership of Er. Ashok Kumar Singason Pandit.' }
   ];
-
-
 
   return (
     <div className="bg-slate-50 dark:bg-brand-dark transition-colors duration-300 font-sans pb-20">
@@ -34,13 +32,62 @@ const About = () => {
             About Pandit Infra
           </h1>
           <p className="text-slate-400 text-sm max-w-lg mx-auto mt-2">
-            Engineering robust structures and highways with absolute technical precision and quality.
+            Engineering robust structures, highways, and industrial facilities with absolute technical precision and ISO standard quality.
           </p>
         </div>
       </section>
 
-      {/* Vision & Mission */}
+      {/* Owner & Corporate Leadership Spotlight */}
       <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-slate-800 relative overflow-hidden"
+          >
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex flex-col lg:flex-row items-center gap-10 relative z-10">
+              {/* Owner Avatar / Crest Badge */}
+              <div className="shrink-0 text-center">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-gradient-to-tr from-brand-orange to-amber-400 p-1 shadow-2xl mx-auto">
+                  <div className="w-full h-full rounded-[22px] bg-slate-900 flex flex-col items-center justify-center p-4 text-center">
+                    <UserCheck size={48} className="text-brand-orange mb-2" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+                      Owner & MD
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Owner Bio & Corporate Message */}
+              <div className="space-y-4 text-center lg:text-left flex-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[10px] font-extrabold uppercase tracking-widest">
+                  <Sparkles size={12} /> Executive Leadership
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                  Er. Ashok Kumar Singason Pandit
+                </h2>
+                <p className="text-amber-400 font-bold text-sm tracking-wide">
+                  Owner & Managing Director — Pandit Infra & Construction Pvt. Ltd.
+                </p>
+
+                <p className="text-slate-300 text-sm leading-relaxed font-medium italic border-l-2 border-brand-orange pl-4 my-4">
+                  "Engineering civil infrastructure is not merely about pouring concrete — it is about constructing an enduring legacy of structural resilience, zero-compromise safety, and unyielding technical precision for generations to come."
+                </p>
+
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Under the visionary leadership of <strong>Er. Ashok Kumar Singason Pandit</strong>, Pandit Infra has scaled into a premier civil engineering and infrastructure powerhouse across Gujarat and Western India, completing landmark RCC commercial hubs, 6-lane highways, precast box culverts, and industrial PEB facilities.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Vision */}
@@ -53,7 +100,7 @@ const About = () => {
                   Our Corporate Vision
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                  To be recognized as a premier civil engineering force in India, known for building sustainable, resilient infrastructure, adhering to timelines, and pioneering state-of-the-art construction processes.
+                  To be recognized as a premier civil engineering force in India under Er. Ashok Kumar Singason Pandit's leadership, known for building sustainable, resilient infrastructure, adhering to timelines, and pioneering state-of-the-art construction processes.
                 </p>
               </div>
             </div>
@@ -156,8 +203,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-
 
     </div>
   );

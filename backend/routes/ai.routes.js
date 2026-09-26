@@ -5,6 +5,7 @@ const router = express.Router();
 // Knowledge base and calculation engine for Pandit Infra AI
 const PANDIT_KNOWLEDGE = {
   company: "Pandit Infra & Construction Pvt. Ltd.",
+  owner: "Er. Ashok Kumar Singason Pandit (Owner & Managing Director)",
   experience: "15+ Years of Heavy Civil Engineering & Infrastructure Excellence",
   locations: "Headquartered in Surat, Gujarat with projects across Maharashtra & Western India",
   services: [
@@ -253,6 +254,9 @@ Provide step-by-step engineering execution steps, standard material mixes (M20/M
         `4. 💧 **Waterproofing & Flooring** (APP membrane, vitrified tiles, Kota stone)\n` +
         `5. 🛣️ **Roads & Box Culverts** (Bituminous asphalt paving, storm drains)\n` +
         `6. 🏗️ **PEB Warehouses** (Heavy structural steel fabrication)`;
+    } else if (lower.includes("owner") || lower.includes("founder") || lower.includes("ashok") || lower.includes("singason") || lower.includes("director") || lower.includes("who owns")) {
+      reply = `**Pandit Infra & Construction Pvt. Ltd.** is owned and led by **Er. Ashok Kumar Singason Pandit** (Owner & Managing Director).\n\n` +
+        `Under Er. Ashok Kumar Singason Pandit's executive leadership, Pandit Infra has delivered landmark heavy civil infrastructure, RCC commercial foundations, 6-lane highways, and industrial PEB warehouses across India.`;
     } else if (lower.includes("contact") || lower.includes("phone") || lower.includes("email") || lower.includes("quote")) {
       reply = `You can consult our civil engineering desk directly:\n\n` +
         `📍 **Headquarters**: Vesu Main Road, Surat, Gujarat - 395007\n` +
