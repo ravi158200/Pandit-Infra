@@ -7,7 +7,7 @@
     "icon": "Building2",
     "description": "Residential, commercial, and high-rise structures built to top standards.",
     "detailedDescription": "From architectural concepts to structural execution, we construct modern homes, office blocks, shopping centers, and high-rise apartments. We ensure structural integrity, compliance with safety codes, and execution within standard timeline boundaries.",
-    "image": "/src/assets/services/building-construction.png"
+    "image": "/images/services/building-construction.png"
   },
   {
     "_id": "6a2440a597c7fcbe3506523a",
@@ -17,7 +17,7 @@
     "icon": "Construction",
     "description": "Highways, arterial roads, and asphalt surfacing works.",
     "detailedDescription": "Our road division specializes in building robust highway links, urban avenues, and heavy-duty industrial pavements. We utilize premium hot-mix asphalt, concrete surfacing technology, and site preparation machinery to construct durable roadways.",
-    "image": "/src/assets/services/road-construction.png"
+    "image": "/images/services/road-pavement.png"
   },
   {
     "_id": "6a2440a597c7fcbe3506523b",
@@ -27,7 +27,7 @@
     "icon": "Palette",
     "description": "Premium modern false ceilings, wall panels, and interior designs.",
     "detailedDescription": "Transforming interior environments into sleek and functional spaces. We handle modular partition setups, false ceilings, custom cabinetry, flooring solutions, and finishings for corporate hubs as well as premium residential estates.",
-    "image": "/src/assets/services/interior-work.png"
+    "image": "/images/services/interior-fit-out.png"
   },
   {
     "_id": "6a2440a597c7fcbe3506523c",
@@ -37,7 +37,7 @@
     "icon": "Droplets",
     "description": "Heavy plumbing, drainage planning, and high-pressure supply systems.",
     "detailedDescription": "Comprehensive plumbing layout design and installation for multi-story apartments and industrial parks. Includes water treatment distribution pipes, sewage management layouts, and modern sanitary installations.",
-    "image": "/src/assets/services/plumbing-solutions.png"
+    "image": "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80"
   },
   {
     "_id": "6a2440a597c7fcbe3506523e",
@@ -47,7 +47,7 @@
     "icon": "HardHat",
     "description": "Reinforced cement concrete structural foundations and beams.",
     "detailedDescription": "Execution of massive concrete foundation layouts, structural slabs, shear walls, retaining walls, and pillars. We deploy precision-mixed concrete and reinforcement templates to ensure superior load-bearing specifications.",
-    "image": "/src/assets/services/rcc-work.png"
+    "image": "/images/services/rcc-structural.png"
   },
   {
     "_id": "6a2440a597c7fcbe3506523f",
@@ -57,7 +57,7 @@
     "icon": "DraftingCompass",
     "description": "Advanced CAD blueprinting and structural stability analysis.",
     "detailedDescription": "Expert civil engineering planning and blueprint analysis. We offer structural calculations, seismic analysis, foundation modeling, and 3D CAD visualization to design robust structural framing.",
-    "image": "/src/assets/services/structural-design.png"
+    "image": "https://images.unsplash.com/photo-1503387762-592dedb82617?auto=format&fit=crop&w=800&q=80"
   },
   {
     "_id": "6a2440a597c7fcbe35065240",
@@ -67,7 +67,7 @@
     "icon": "Hammer",
     "description": "Retrofitting, visual remodels, and structural rehabilitation.",
     "detailedDescription": "Rejuvenating older properties, strengthening dilapidated components, and upgrading structures with modern fixtures. Our restoration team breathes new life into corporate workspaces and historical builds.",
-    "image": "/src/assets/services/renovation-services.png"
+    "image": "/images/services/waterproofing.png"
   },
   {
     "_id": "6a2440a597c7fcbe35065241",
@@ -77,6 +77,6 @@
     "icon": "Factory",
     "description": "Warehouses, plant foundations, and large manufacturing sheds.",
     "detailedDescription": "We specialize in industrial infrastructure including pre-engineered structural steel buildings (PEB), factory storage warehouses, custom heavy machinery foundations, and industrial drainage pipelines.",
-    "image": "/src/assets/services/industrial-projects.png"
+    "image": "/images/services/peb-steel-shed.png"
   }
 ]

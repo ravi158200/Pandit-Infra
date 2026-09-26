@@ -9,7 +9,7 @@
     "status": "Completed",
     "progress": 100,
     "client": "Apex Business Hubs",
-    "location": "Mumbai, MH",
+    "location": "Surat, Gujarat",
     "images": [
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
@@ -36,13 +36,13 @@
     "_id": "6a2440a597c7fcbe35065243",
     "createdAt": "2026-06-06T15:45:41.427Z",
     "updatedAt": "2026-06-06T15:45:41.427Z",
-    "title": "State Highway Route 4",
-    "description": "4-lane highway expansion project spanning 12 kilometers including culvert installations and toll plaza layouts.",
+    "title": "Surat Ring Road 6-Lane Expressway",
+    "description": "6-lane highway expansion project spanning 14.5 kilometers including box culvert installations and toll plaza layouts.",
     "category": "Infrastructure",
     "status": "Ongoing",
-    "progress": 65,
-    "client": "National Roads Authority",
-    "location": "Pune-Nashik Link",
+    "progress": 78,
+    "client": "Surat Urban Development Authority (SUDA)",
+    "location": "Surat Outer Ring Road, Gujarat",
     "images": [
       "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80"
@@ -75,7 +75,7 @@
     "status": "Live",
     "progress": 40,
     "client": "Pandit Housing Realty",
-    "location": "Thane West, MH",
+    "location": "Vesu Main Road, Surat",
     "images": [
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80"
@@ -107,10 +107,10 @@
     "category": "Industrial",
     "status": "Ongoing",
     "progress": 75,
-    "client": "Giga Logistics Corp",
-    "location": "Nagpur Industrial Zone, MH",
+    "client": "Hazira Logistics & Infrastructure Corp",
+    "location": "Hazira Port Industrial Zone, Surat",
     "images": [
-      "/src/assets/projects/industrial-project.png"
+      "/images/industrial-project.png"
     ],
     "timeline": [
       {
@@ -140,9 +140,9 @@
     "status": "Completed",
     "progress": 100,
     "client": "Singhania Estates",
-    "location": "South Mumbai, MH",
+    "location": "Dumas Road, Surat",
     "images": [
-      "/src/assets/projects/renovation-project.png"
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
     ],
     "timeline": [
       {

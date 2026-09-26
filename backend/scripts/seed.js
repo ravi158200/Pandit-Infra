@@ -15,57 +15,56 @@ const servicesData = [
     icon: 'Building2',
     description: 'Residential, commercial, and high-rise structures built to top standards.',
     detailedDescription: 'From architectural concepts to structural execution, we construct modern homes, office blocks, shopping centers, and high-rise apartments. We ensure structural integrity, compliance with safety codes, and execution within standard timeline boundaries.',
-    image: '/src/assets/services/building-construction.png'
+    image: '/images/services/building-construction.png'
   },
   {
     title: 'Road Construction',
     icon: 'Construction',
     description: 'Highways, arterial roads, and asphalt surfacing works.',
     detailedDescription: 'Our road division specializes in building robust highway links, urban avenues, and heavy-duty industrial pavements. We utilize premium hot-mix asphalt, concrete surfacing technology, and site preparation machinery to construct durable roadways.',
-    image: '/src/assets/services/road-construction.png'
+    image: '/images/services/road-pavement.png'
   },
   {
     title: 'Interior Work',
     icon: 'Palette',
     description: 'Premium modern false ceilings, wall panels, and interior designs.',
     detailedDescription: 'Transforming interior environments into sleek and functional spaces. We handle modular partition setups, false ceilings, custom cabinetry, flooring solutions, and finishings for corporate hubs as well as premium residential estates.',
-    image: '/src/assets/services/interior-work.png'
+    image: '/images/services/interior-fit-out.png'
   },
   {
     title: 'Plumbing Solutions',
     icon: 'Droplets',
     description: 'Heavy plumbing, drainage planning, and high-pressure supply systems.',
     detailedDescription: 'Comprehensive plumbing layout design and installation for multi-story apartments and industrial parks. Includes water treatment distribution pipes, sewage management layouts, and modern sanitary installations.',
-    image: '/src/assets/services/plumbing-solutions.png'
+    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80'
   },
-
   {
     title: 'RCC Work',
     icon: 'HardHat',
     description: 'Reinforced cement concrete structural foundations and beams.',
     detailedDescription: 'Execution of massive concrete foundation layouts, structural slabs, shear walls, retaining walls, and pillars. We deploy precision-mixed concrete and reinforcement templates to ensure superior load-bearing specifications.',
-    image: '/src/assets/services/rcc-work.png'
+    image: '/images/services/rcc-structural.png'
   },
   {
     title: 'Structural Design',
     icon: 'DraftingCompass',
     description: 'Advanced CAD blueprinting and structural stability analysis.',
     detailedDescription: 'Expert civil engineering planning and blueprint analysis. We offer structural calculations, seismic analysis, foundation modeling, and 3D CAD visualization to design robust structural framing.',
-    image: '/src/assets/services/structural-design.png'
+    image: 'https://images.unsplash.com/photo-1503387762-592dedb82617?auto=format&fit=crop&w=800&q=80'
   },
   {
     title: 'Renovation Services',
     icon: 'Hammer',
     description: 'Retrofitting, visual remodels, and structural rehabilitation.',
     detailedDescription: 'Rejuvenating older properties, strengthening dilapidated components, and upgrading structures with modern fixtures. Our restoration team breathes new life into corporate workspaces and historical builds.',
-    image: '/src/assets/services/renovation-services.png'
+    image: '/images/services/waterproofing.png'
   },
   {
     title: 'Industrial Projects',
     icon: 'Factory',
     description: 'Warehouses, plant foundations, and large manufacturing sheds.',
     detailedDescription: 'We specialize in industrial infrastructure including pre-engineered structural steel buildings (PEB), factory storage warehouses, custom heavy machinery foundations, and industrial drainage pipelines.',
-    image: '/src/assets/services/industrial-projects.png'
+    image: '/images/services/peb-steel-shed.png'
   }
 ];
 
@@ -77,7 +76,7 @@ const projectsData = [
     status: 'Completed',
     progress: 100,
     client: 'Apex Business Hubs',
-    location: 'Mumbai, MH',
+    location: 'Surat, Gujarat',
     images: [
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
@@ -89,13 +88,13 @@ const projectsData = [
     ]
   },
   {
-    title: 'State Highway Route 4',
-    description: '4-lane highway expansion project spanning 12 kilometers including culvert installations and toll plaza layouts.',
+    title: 'Surat Ring Road 6-Lane Expressway',
+    description: '6-lane highway expansion project spanning 14.5 kilometers including box culvert installations and toll plaza layouts.',
     category: 'Infrastructure',
     status: 'Ongoing',
-    progress: 65,
-    client: 'National Roads Authority',
-    location: 'Pune-Nashik Link',
+    progress: 78,
+    client: 'Surat Urban Development Authority (SUDA)',
+    location: 'Surat Ring Road, Gujarat',
     images: [
       'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80'
@@ -107,13 +106,13 @@ const projectsData = [
     ]
   },
   {
-    title: 'Pandit Green Heights Res',
+    title: 'Pandit Green Heights Residential Towers',
     description: 'Premium residential luxury towers with 2BHK/3BHK smart layouts, landscaped gardens, and a grand clubhouse.',
     category: 'Residential',
     status: 'Live',
     progress: 40,
     client: 'Pandit Housing Realty',
-    location: 'Thane West, MH',
+    location: 'Vesu Main Road, Surat',
     images: [
       'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'
@@ -125,15 +124,15 @@ const projectsData = [
     ]
   },
   {
-    title: 'Giga-Logistics PEB Warehouse',
+    title: 'Giga-Logistics PEB Industrial Warehouse',
     description: 'Construction of a 50,000 sq ft pre-engineered steel warehouse (PEB structure) featuring high-load concrete flooring and integrated storm drainage layout.',
     category: 'Industrial',
     status: 'Ongoing',
     progress: 75,
-    client: 'Giga Logistics Corp',
-    location: 'Nagpur Industrial Zone, MH',
+    client: 'Hazira Logistics & Infrastructure Corp',
+    location: 'Hazira Port Industrial Zone, Surat',
     images: [
-      '/src/assets/projects/industrial-project.png'
+      '/images/industrial-project.png'
     ],
     timeline: [
       { status: 'Excavation', description: 'High-tonnage grading, soil compaction, and foundation layout completed.', date: new Date('2025-12-10') },
@@ -148,9 +147,9 @@ const projectsData = [
     status: 'Completed',
     progress: 100,
     client: 'Singhania Estates',
-    location: 'South Mumbai, MH',
+    location: 'Dumas Road, Surat',
     images: [
-      '/src/assets/projects/renovation-project.png'
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
     ],
     timeline: [
       { status: 'Initiated', description: 'Structural stability audit and planning approved.', date: new Date('2025-09-05') },
@@ -167,8 +166,8 @@ const galleryData = [
   { imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80', title: 'RCC Steel Mesh Reinforcement', category: 'Infrastructure' },
   { imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', title: 'Penthouse Lounge interior', category: 'Residential' },
   { imageUrl: 'https://images.unsplash.com/photo-1503387762-592dedb82617?auto=format&fit=crop&w=800&q=80', title: 'Architect Blueprint Planning', category: 'Commercial' },
-  { imageUrl: '/src/assets/gallery/industrial-gallery.png', title: 'Industrial Warehouse Truss Setup', category: 'Industrial' },
-  { imageUrl: '/src/assets/gallery/renovation-gallery.png', title: 'Luxury Villa Living Room Remodel', category: 'Renovation' }
+  { imageUrl: '/images/industrial-gallery.png', title: 'Industrial Warehouse Truss Setup', category: 'Industrial' },
+  { imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80', title: 'Luxury Villa Living Room Remodel', category: 'Renovation' }
 ];
 
 async function seed() {

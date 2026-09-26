@@ -51,7 +51,7 @@
     "_id": "6a2440a597c7fcbe3506524c",
     "createdAt": "2026-06-06T15:45:41.428Z",
     "updatedAt": "2026-06-06T15:45:41.428Z",
-    "imageUrl": "/src/assets/gallery/industrial-gallery.png",
+    "imageUrl": "/images/industrial-gallery.png",
     "title": "Industrial Warehouse Truss Setup",
     "category": "Industrial"
   },
@@ -59,7 +59,7 @@
     "_id": "6a2440a597c7fcbe3506524e",
     "createdAt": "2026-06-06T15:45:41.428Z",
     "updatedAt": "2026-06-06T15:45:41.428Z",
-    "imageUrl": "/src/assets/gallery/renovation-gallery.png",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
     "title": "Luxury Villa Living Room Remodel",
     "category": "Renovation"
   }
