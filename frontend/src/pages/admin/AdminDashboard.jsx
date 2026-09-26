@@ -51,6 +51,14 @@ const AdminDashboard = () => {
   const [newLog, setNewLog] = useState({ status: 'Live Update', description: '' });
   const [editingProjectId, setEditingProjectId] = useState(null);
 
+  // Query edit & filter states
+  const [editingQuery, setEditingQuery] = useState(null);
+  const [editQueryForm, setEditQueryForm] = useState({
+    name: '', email: '', phone: '', serviceType: '', message: '', status: 'New', adminNotes: '', replyMessage: ''
+  });
+  const [querySearchTerm, setQuerySearchTerm] = useState('');
+  const [queryStatusFilter, setQueryStatusFilter] = useState('All');
+
   // Redirect if not authorized
   useEffect(() => {
     if (!authLoading) {
@@ -117,6 +125,33 @@ const AdminDashboard = () => {
       setQueries(queries.map(q => q._id === id ? res.data : q));
     } catch (err) {
       alert('Error updating status');
+    }
+  };
+
+  const handleOpenEditQuery = (q) => {
+    setEditingQuery(q);
+    setEditQueryForm({
+      name: q.name || '',
+      email: q.email || '',
+      phone: q.phone || '',
+      serviceType: q.serviceType || 'General Inquiry',
+      message: q.message || '',
+      status: q.status || 'New',
+      adminNotes: q.adminNotes || '',
+      replyMessage: q.replyMessage || ''
+    });
+  };
+
+  const handleSaveQueryEdit = async (e) => {
+    e.preventDefault();
+    if (!editingQuery) return;
+    try {
+      const res = await API.put(`/queries/${editingQuery._id}`, editQueryForm);
+      setQueries(queries.map(q => q._id === editingQuery._id ? res.data : q));
+      setEditingQuery(null);
+      alert('Inquiry record & admin notes updated successfully!');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Error updating query details');
     }
   };
 
@@ -477,53 +512,292 @@ const AdminDashboard = () => {
 
         {/* --- QUERIES MANAGEMENT --- */}
         {activeTab === 'Queries' && (
-          <div className="bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-800">
-                    <th className="p-4">Contact</th>
-                    <th className="p-4">Service Type</th>
-                    <th className="p-4">Message Details</th>
-                    <th className="p-4">Status</th>
-                    <th className="p-4 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800 font-medium">
-                  {queries.map(q => (
-                    <tr key={q._id} className="hover:bg-slate-850/30 transition">
-                      <td className="p-4">
-                        <span className="font-extrabold text-slate-200 block">{q.name}</span>
-                        <span className="text-slate-450 block">{q.email}</span>
-                        <span className="text-slate-450 block">{q.phone}</span>
-                      </td>
-                      <td className="p-4 text-slate-300 font-bold">{q.serviceType || 'General'}</td>
-                      <td className="p-4 text-slate-450 max-w-xs break-words">{q.message}</td>
-                      <td className="p-4">
-                        <select
-                          value={q.status}
-                          onChange={(e) => handleUpdateQueryStatus(q._id, e.target.value)}
-                          className="px-2.5 py-1.5 rounded-lg border border-slate-850 bg-slate-950 text-slate-300 font-semibold focus:ring-1 focus:ring-brand-orange focus:outline-none [&>option]:bg-slate-900 [&>option]:text-white"
-                        >
-                          <option value="New">New</option>
-                          <option value="Read">Read</option>
-                          <option value="Replied">Replied</option>
-                        </select>
-                      </td>
-                      <td className="p-4 text-center">
-                        <button
-                          onClick={() => handleDeleteQuery(q._id)}
-                          className="p-2 text-red-500 hover:bg-red-950/40 rounded-lg transition"
-                          title="Delete Lead"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="space-y-6">
+            
+            {/* Search & Filter Header Bar */}
+            <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+              {/* Search Box */}
+              <div className="w-full md:w-80 relative">
+                <input
+                  type="text"
+                  value={querySearchTerm}
+                  onChange={(e) => setQuerySearchTerm(e.target.value)}
+                  placeholder="Search by client name, email, phone, or service..."
+                  className="w-full bg-slate-950 text-white text-xs px-3.5 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-brand-orange placeholder:text-slate-500"
+                />
+              </div>
+
+              {/* Status Filter Tabs */}
+              <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto w-full md:w-auto">
+                {['All', 'New', 'In Review', 'Contacted', 'Replied', 'Resolved', 'Archived'].map((st) => (
+                  <button
+                    key={st}
+                    onClick={() => setQueryStatusFilter(st)}
+                    className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                      queryStatusFilter === st
+                        ? 'bg-brand-orange text-slate-950 font-extrabold shadow-sm'
+                        : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-white'
+                    }`}
+                  >
+                    {st}
+                    {st !== 'All' && (
+                      <span className="ml-1 opacity-70">
+                        ({queries.filter(q => q.status === st).length})
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Queries Table */}
+            <div className="bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-lg overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr className="bg-slate-950 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-800">
+                      <th className="p-4">Client Contact</th>
+                      <th className="p-4">Service Category</th>
+                      <th className="p-4">Scope / Inquiry Message</th>
+                      <th className="p-4">Status & Notes</th>
+                      <th className="p-4 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800 font-medium">
+                    {(() => {
+                      const filtered = queries.filter((q) => {
+                        const matchesSearch = 
+                          q.name?.toLowerCase().includes(querySearchTerm.toLowerCase()) ||
+                          q.email?.toLowerCase().includes(querySearchTerm.toLowerCase()) ||
+                          q.phone?.toLowerCase().includes(querySearchTerm.toLowerCase()) ||
+                          q.serviceType?.toLowerCase().includes(querySearchTerm.toLowerCase()) ||
+                          q.message?.toLowerCase().includes(querySearchTerm.toLowerCase());
+                        
+                        const matchesStatus = queryStatusFilter === 'All' || q.status === queryStatusFilter;
+                        return matchesSearch && matchesStatus;
+                      });
+
+                      if (filtered.length === 0) {
+                        return (
+                          <tr>
+                            <td colSpan="5" className="p-8 text-center text-slate-500 text-xs font-semibold">
+                              No inquiries found matching current search or status filter.
+                            </td>
+                          </tr>
+                        );
+                      }
+
+                      return filtered.map((q) => (
+                        <tr key={q._id} className="hover:bg-slate-850/40 transition">
+                          <td className="p-4">
+                            <span className="font-extrabold text-slate-200 block text-sm">{q.name}</span>
+                            <div className="flex items-center gap-2 mt-1">
+                              <a href={`mailto:${q.email}`} className="text-slate-400 hover:text-brand-orange transition">
+                                {q.email}
+                              </a>
+                            </div>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <a href={`tel:${q.phone}`} className="text-slate-400 hover:text-emerald-400 font-semibold transition">
+                                📞 {q.phone}
+                              </a>
+                              <a
+                                href={`https://wa.me/91${q.phone?.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${q.name}, this is Pandit Infra engineering desk regarding your inquiry.`)}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-[10px] bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 px-1.5 py-0.5 rounded font-bold"
+                              >
+                                WhatsApp
+                              </a>
+                            </div>
+                          </td>
+                          <td className="p-4">
+                            <span className="inline-block bg-slate-800 text-slate-200 px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-700">
+                              {q.serviceType || 'General Inquiry'}
+                            </span>
+                          </td>
+                          <td className="p-4 max-w-sm">
+                            <p className="text-slate-300 line-clamp-2 leading-relaxed">{q.message}</p>
+                            {q.adminNotes && (
+                              <span className="inline-block mt-1 text-[10px] text-amber-400 bg-amber-950/40 border border-amber-800/50 px-2 py-0.5 rounded">
+                                📝 Admin Note: {q.adminNotes}
+                              </span>
+                            )}
+                          </td>
+                          <td className="p-4">
+                            <select
+                              value={q.status || 'New'}
+                              onChange={(e) => handleUpdateQueryStatus(q._id, e.target.value)}
+                              className={`px-3 py-1.5 rounded-lg border font-bold text-xs focus:outline-none transition cursor-pointer ${
+                                q.status === 'New' ? 'bg-orange-950/80 border-orange-500 text-orange-400' :
+                                q.status === 'In Review' ? 'bg-amber-950/80 border-amber-500 text-amber-300' :
+                                q.status === 'Contacted' ? 'bg-blue-950/80 border-blue-500 text-blue-400' :
+                                q.status === 'Replied' ? 'bg-indigo-950/80 border-indigo-500 text-indigo-300' :
+                                q.status === 'Resolved' ? 'bg-emerald-950/80 border-emerald-500 text-emerald-400' :
+                                'bg-slate-950 border-slate-700 text-slate-400'
+                              } [&>option]:bg-slate-900 [&>option]:text-white`}
+                            >
+                              <option value="New">🟢 New</option>
+                              <option value="In Review">🟡 In Review</option>
+                              <option value="Contacted">🔵 Contacted</option>
+                              <option value="Replied">🟣 Replied</option>
+                              <option value="Resolved">✅ Resolved</option>
+                              <option value="Archived">📁 Archived</option>
+                            </select>
+                          </td>
+                          <td className="p-4 text-center">
+                            <div className="flex items-center justify-center gap-1.5">
+                              <button
+                                onClick={() => handleOpenEditQuery(q)}
+                                className="p-2 bg-slate-800 hover:bg-slate-700 text-amber-400 rounded-lg transition cursor-pointer"
+                                title="Edit & Manage Details"
+                              >
+                                <Edit size={15} />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteQuery(q._id)}
+                                className="p-2 bg-slate-800 hover:bg-red-950/60 text-red-400 rounded-lg transition cursor-pointer"
+                                title="Delete Inquiry"
+                              >
+                                <Trash2 size={15} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ));
+                    })()}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Modal for Editing Query Details & Admin Notes */}
+            {editingQuery && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+                <div className="bg-slate-900 text-white rounded-2xl border border-slate-800 max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 className="font-extrabold text-base text-slate-100 flex items-center gap-2">
+                      <Edit size={16} className="text-brand-orange" />
+                      Manage & Change Inquiry Details
+                    </h3>
+                    <button
+                      onClick={() => setEditingQuery(null)}
+                      className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                    >
+                      <XIcon size={18} />
+                    </button>
+                  </div>
+
+                  <form onSubmit={handleSaveQueryEdit} className="space-y-4 text-xs font-semibold">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-slate-400 mb-1">Client Name</label>
+                        <input
+                          type="text"
+                          value={editQueryForm.name}
+                          onChange={(e) => setEditQueryForm({ ...editQueryForm, name: e.target.value })}
+                          className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white focus:border-brand-orange focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-400 mb-1">Service Requested</label>
+                        <input
+                          type="text"
+                          value={editQueryForm.serviceType}
+                          onChange={(e) => setEditQueryForm({ ...editQueryForm, serviceType: e.target.value })}
+                          className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white focus:border-brand-orange focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-slate-400 mb-1">Email</label>
+                        <input
+                          type="email"
+                          value={editQueryForm.email}
+                          onChange={(e) => setEditQueryForm({ ...editQueryForm, email: e.target.value })}
+                          className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white focus:border-brand-orange focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-400 mb-1">Phone Number</label>
+                        <input
+                          type="text"
+                          value={editQueryForm.phone}
+                          onChange={(e) => setEditQueryForm({ ...editQueryForm, phone: e.target.value })}
+                          className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white focus:border-brand-orange focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-slate-400 mb-1">Inquiry Status</label>
+                      <select
+                        value={editQueryForm.status}
+                        onChange={(e) => setEditQueryForm({ ...editQueryForm, status: e.target.value })}
+                        className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white font-bold focus:border-brand-orange focus:outline-none [&>option]:bg-slate-900"
+                      >
+                        <option value="New">🟢 New Inquiry</option>
+                        <option value="In Review">🟡 In Review</option>
+                        <option value="Contacted">🔵 Contacted Client</option>
+                        <option value="Replied">🟣 Replied with Quote</option>
+                        <option value="Resolved">✅ Resolved & Approved</option>
+                        <option value="Archived">📁 Archived</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-slate-400 mb-1">Inquiry Scope & Message</label>
+                      <textarea
+                        rows="3"
+                        value={editQueryForm.message}
+                        onChange={(e) => setEditQueryForm({ ...editQueryForm, message: e.target.value })}
+                        className="w-full bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-white focus:border-brand-orange focus:outline-none resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-amber-400 mb-1">Private Admin Notes & Engineering Remarks</label>
+                      <textarea
+                        rows="2"
+                        value={editQueryForm.adminNotes}
+                        onChange={(e) => setEditQueryForm({ ...editQueryForm, adminNotes: e.target.value })}
+                        placeholder="Add site engineer comments, estimated BOQ budget, or follow-up notes..."
+                        className="w-full bg-slate-950 p-2.5 rounded-lg border border-amber-900/60 text-amber-200 placeholder:text-slate-600 focus:border-amber-500 focus:outline-none resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-emerald-400 mb-1">Official Client Response / Reply Summary</label>
+                      <textarea
+                        rows="2"
+                        value={editQueryForm.replyMessage}
+                        onChange={(e) => setEditQueryForm({ ...editQueryForm, replyMessage: e.target.value })}
+                        placeholder="Summary of formal quote or response sent to client..."
+                        className="w-full bg-slate-950 p-2.5 rounded-lg border border-emerald-900/60 text-emerald-200 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none resize-none"
+                      />
+                    </div>
+
+                    <div className="pt-3 flex justify-end gap-2 border-t border-slate-800">
+                      <button
+                        type="button"
+                        onClick={() => setEditingQuery(null)}
+                        className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-6 py-2 rounded-lg bg-brand-orange hover:bg-orange-600 text-white font-bold shadow-md"
+                      >
+                        Save Changes & Update Query
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
           </div>
         )}
 

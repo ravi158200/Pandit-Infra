@@ -12,20 +12,25 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const newQuery = new Query({ name, email, phone, message, serviceType });
+    const newQuery = new Query({ 
+      name, 
+      email, 
+      phone, 
+      message, 
+      serviceType: serviceType || 'General Inquiry' 
+    });
     const savedQuery = await newQuery.save();
 
-    // Mocking email notification
     console.log(`
 =========================================
 EMAIL NOTIFICATION (MOCKED)
-TO: administration@panditinfra.com
-SUBJECT: New Contact Inquiry from ${name}
+TO: panditinfra503@gmail.com
+SUBJECT: New Inquiry from ${name}
 -----------------------------------------
 Name: ${name}
 Email: ${email}
 Phone: ${phone}
-Service Requested: ${serviceType || 'General Civil Work Query'}
+Service Requested: ${serviceType || 'General Civil Inquiry'}
 Message: ${message}
 =========================================
     `);
@@ -46,20 +51,27 @@ router.get('/', verifyAdmin, async (req, res) => {
   }
 });
 
-// Update Query Status (Admin only)
+// Update Query Details & Status (Admin only)
 router.put('/:id', verifyAdmin, async (req, res) => {
-  const { status } = req.body;
-  if (!status) return res.status(400).json({ message: 'Status is required' });
+  const { status, adminNotes, replyMessage, name, email, phone, message, serviceType } = req.body;
 
   try {
     const queryItem = await Query.findById(req.params.id);
     if (!queryItem) return res.status(404).json({ message: 'Inquiry not found' });
 
-    queryItem.status = status;
+    if (status !== undefined) queryItem.status = status;
+    if (adminNotes !== undefined) queryItem.adminNotes = adminNotes;
+    if (replyMessage !== undefined) queryItem.replyMessage = replyMessage;
+    if (name !== undefined) queryItem.name = name;
+    if (email !== undefined) queryItem.email = email;
+    if (phone !== undefined) queryItem.phone = phone;
+    if (message !== undefined) queryItem.message = message;
+    if (serviceType !== undefined) queryItem.serviceType = serviceType;
+
     const updatedQuery = await queryItem.save();
     res.json(updatedQuery);
   } catch (err) {
-    res.status(500).json({ message: 'Error updating inquiry status', error: err.message });
+    res.status(500).json({ message: 'Error updating inquiry', error: err.message });
   }
 });
 
